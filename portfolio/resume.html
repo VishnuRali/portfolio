@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rali Vishnu Vardhan — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #03050a;
+      --c1: #00fff0;
+      --c2: #7b2fff;
+      --c3: #ff2f7b;
+      --glass: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.07);
+      --text: #f0f4ff;
+      --muted: #5a6a8a;
+      --muted2: #8899bb;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    /* BG blobs */
+    .blob { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+    .blob1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(123,47,255,0.15), transparent 70%); top: -100px; right: -100px; }
+    .blob2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,255,240,0.08), transparent 70%); bottom: -100px; left: -100px; }
+
+    /* TOP BAR */
+    .top-bar {
+      max-width: 860px; margin: 0 auto 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 2;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted2); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      border: 1px solid var(--glass-border);
+      padding: 8px 18px; border-radius: 8px;
+      transition: all 0.2s;
+      background: var(--glass); backdrop-filter: blur(10px);
+    }
+    .back-btn:hover { color: var(--c1); border-color: rgba(0,255,240,0.3); }
+
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--c2), var(--c1));
+      color: #000; font-weight: 700; font-size: 13px;
+      padding: 10px 24px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 0 30px rgba(0,255,240,0.2);
+      transition: all 0.2s;
+    }
+    .download-btn:hover { box-shadow: 0 0 50px rgba(0,255,240,0.4); transform: translateY(-1px); }
+
+    /* RESUME CARD */
+    .resume {
+      max-width: 860px; margin: 0 auto;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative; z-index: 2;
+      backdrop-filter: blur(20px);
+    }
+
+    /* HEADER */
+    .resume-header {
+      padding: 52px 60px 44px;
+      border-bottom: 1px solid var(--glass-border);
+      position: relative; overflow: hidden;
+    }
+    .resume-header::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,47,255,0.2), transparent 70%);
+    }
+    .resume-header::after {
+      content: '';
+      position: absolute; bottom: -40px; left: -40px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,240,0.1), transparent 70%);
+    }
+
+    .resume-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 400;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, var(--text), var(--muted2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      position: relative; z-index: 1;
+    }
+    .resume-title {
+      font-size: 16px; color: var(--c1);
+      font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase; font-size: 12px;
+      margin-bottom: 24px;
+      position: relative; z-index: 1;
+    }
+    .resume-contacts {
+      display: flex; flex-wrap: wrap; gap: 20px;
+      position: relative; z-index: 1;
+    }
+    .resume-contact-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted2);
+    }
+    .resume-contact-item span { color: var(--c1); font-size: 14px; }
+    .resume-contact-item a { color: var(--muted2); text-decoration: none; }
+    .resume-contact-item a:hover { color: var(--c1); }
+
+    /* BODY */
+    .resume-body {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+    }
+
+    .resume-main { padding: 48px 48px 48px 60px; border-right: 1px solid var(--glass-border); }
+    .resume-side { padding: 48px 40px 48px 40px; }
+
+    /* SECTION */
+    .r-section { margin-bottom: 44px; }
+    .r-section:last-child { margin-bottom: 0; }
+
+    .r-section-title {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--c1);
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 24px;
+    }
+    .r-section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--glass-border), transparent);
+    }
+
+    /* OBJECTIVE */
+    .r-objective {
+      font-size: 14px; line-height: 1.9;
+      color: var(--muted2);
+    }
+
+    /* EDUCATION ITEM */
+    .edu-item { margin-bottom: 24px; position: relative; padding-left: 20px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-item::before {
+      content: ''; position: absolute;
+      left: 0; top: 8px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--c1);
+      box-shadow: 0 0 8px var(--c1);
+    }
+    .edu-item::after {
+      content: ''; position: absolute;
+      left: 2.5px; top: 18px; bottom: -20px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--glass-border), transparent);
+    }
+    .edu-item:last-child::after { display: none; }
+
+    .edu-degree {
+      font-size: 15px; font-weight: 700;
+      color: var(--text); letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      font-size: 13px; color: var(--muted2);
+      margin-bottom: 4px;
+    }
+    .edu-detail {
+      font-size: 12px; color: var(--muted);
+    }
+    .edu-score {
+      display: inline-block; margin-top: 6px;
+      background: rgba(0,255,240,0.08);
+      border: 1px solid rgba(0,255,240,0.15);
+      color: var(--c1); font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 6px;
+    }
+
+    /* SKILLS SIDE */
+    .skill-category { margin-bottom: 24px; }
+    .skill-category-title {
+      font-size: 11px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 1.5px; margin-bottom: 10px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill-tag {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      color: var(--muted2); font-size: 12px;
+      padding: 5px 12px; border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .skill-tag:hover { border-color: rgba(0,255,240,0.3); color: var(--c1); }
+
+    /* CERT ITEMS */
+    .cert-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 14px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .cert-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .cert-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--c2); flex-shrink: 0; margin-top: 6px;
+      box-shadow: 0 0 6px var(--c2);
+    }
+    .cert-item-name { font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.4; }
+    .cert-item-org { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* STRENGTHS */
+    .strength-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--muted2);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .strength-item:last-child { border-bottom: none; }
+    .strength-item::before { content: '→'; color: var(--c1); font-size: 11px; }
+
+    /* LANGUAGES */
+    .lang-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .lang-tag {
+      background: rgba(255,47,123,0.08);
+      border: 1px solid rgba(255,47,123,0.2);
+      color: var(--c3); font-size: 12px; font-weight: 600;
+      padding: 5px 14px; border-radius: 20px;
+    }
+
+    /* STATUS BADGE */
+    .status-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 20px;
+      position: relative; z-index: 1;
+    }
+    .status-dot-live {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #00e5a0; box-shadow: 0 0 8px #00e5a0;
+      animation: pulse2 2s infinite;
+    }
+    @keyframes pulse2 {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+    .status-text { font-size: 12px; color: #00e5a0; font-weight: 600; letter-spacing: 0.5px; }
+
+    /* PRINT / RESPONSIVE */
+    @media (max-width: 680px) {
+      .resume-body { grid-template-columns: 1fr; }
+      .resume-main { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 32px 24px; }
+      .resume-side { padding: 32px 24px; }
+      .resume-header { padding: 36px 24px 32px; }
+      .top-bar { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <a href="RALI_VISHNU_VARDHAN_RESUME_.pdf" download class="download-btn">⬇ Download PDF</a>
+</div>
+
+<!-- RESUME CARD -->
+<div class="resume">
+
+  <!-- HEADER -->
+  <div class="resume-header">
+    <div class="status-row">
+      <div class="status-dot-live"></div>
+      <span class="status-text">Available for Full-Time Roles</span>
+    </div>
+    <div class="resume-name">Rali Vishnu Vardhan</div>
+    <div class="resume-title">Full Stack Developer · B.Tech CSE · Hyderabad, India</div>
+    <div class="resume-contacts">
+      <div class="resume-contact-item">
+        <span>📞</span> 7095119246
+      </div>
+      <div class="resume-contact-item">
+        <span>📧</span> <a href="mailto:ralivishnu565@gmail.com">ralivishnu565@gmail.com</a>
+      </div>
+      <div class="resume-contact-item">
+        <span>📍</span> Khammam, Telangana
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="resume-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="resume-main">
+
+      <!-- OBJECTIVE -->
+      <div class="r-section">
+        <div class="r-section-title">Objective</div>
+        <p class="r-objective">
+          Motivated and enthusiastic fresher with hands-on knowledge of HTML, CSS, JavaScript, and Java. Seeking a full-time opportunity to grow as a Full Stack Developer and build impactful products that solve real-world problems.
+        </p>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="r-section">
+        <div class="r-section-title">Education</div>
+
+        <div class="edu-item">
+          <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+          <div class="edu-school">Swarna Bharathi Institute of Science and Technology</div>
+          <div class="edu-detail">Currently Pursuing · 4th Year</div>
+          <span class="edu-score">Final Year</span>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-degree">12th — Intermediate (PCM)</div>
+          <div class="edu-school">Sri Chaitanya Jr Arts and Science College</div>
+          <div class="edu-detail">Telangana State Board of Intermediate Education</div>
+          <span class="edu-score">Score: 80%</span>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-degree">10th — SSC</div>
+          <div class="edu-school">Antarwani Vidyaniketan, Khammam</div>
+          <div class="edu-detail">Board of Secondary Education</div>
+          <span class="edu-score">CGPA: 8.8</span>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="r-section">
+        <div class="r-section-title">Certifications</div>
+
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-item-name">Software Engineering &amp; Coding</div>
+            <div class="cert-item-org">IBM SkillsBuild · Feb 2025</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-item-name">Web Development Basics</div>
+            <div class="cert-item-org">IBM SkillsBuild · Feb 2025</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-item-name">Artificial Intelligence in Practice</div>
+            <div class="cert-item-org">IBM SkillsBuild · Feb 2025</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-item-name">What is Cloud Computing?</div>
+            <div class="cert-item-org">IBM SkillsBuild · Feb 2025</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-item-name">Managing Projects in a Digital Environment</div>
+            <div class="cert-item-org">IBM SkillsBuild · Feb 2025</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-item-name">Online Security</div>
+            <div class="cert-item-org">IBM SkillsBuild · Feb 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDE COLUMN -->
+    <div class="resume-side">
+
+      <!-- SKILLS -->
+      <div class="r-section">
+        <div class="r-section-title">Skills</div>
+
+        <div class="skill-category">
+          <div class="skill-category-title">Frontend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Responsive Design</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-category-title">Backend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Java</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-category-title">Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">VS Code</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="r-section">
+        <div class="r-section-title">Languages</div>
+        <div class="lang-tags">
+          <span class="lang-tag">English</span>
+          <span class="lang-tag">Hindi</span>
+          <span class="lang-tag">Telugu</span>
+        </div>
+      </div>
+
+      <!-- STRENGTHS -->
+      <div class="r-section">
+        <div class="r-section-title">Strengths</div>
+        <div class="strength-item">Good Interpersonal Skills</div>
+        <div class="strength-item">Multilingual Communicator</div>
+        <div class="strength-item">Quick Learner &amp; Adaptable</div>
+        <div class="strength-item">Eager to Learn New Tech</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
