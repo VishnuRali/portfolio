@@ -1,327 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vishnu Vardhan Rali — Full Stack Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vishnu Vardhan Rali — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;
+  --bg2:#161616;
+  --bg3:#1e1e1e;
+  --line:#2a2a2a;
+  --text:#f0ede8;
+  --muted:#6b7280;
+  --accent:#4f8ef7;
+  --accent-light:#1a2540;
+  --serif:'Playfair Display',serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bottom:1px solid var(--line);padding:0 2.5rem;display:flex;justify-content:space-between;align-items:center;height:60px}
+.nav-logo{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:.02em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-resume{font-size:13px;font-weight:500;color:#fff;background:var(--accent);text-decoration:none;padding:.45rem 1.1rem;border-radius:6px;transition:background .2s}
+.nav-resume:hover{background:#1e40af}
+
+/* HERO */
+.hero{max-width:900px;margin:0 auto;padding:100px 2.5rem 80px;display:flex;align-items:flex-start;gap:3rem;border-bottom:1px solid var(--line)}
+.hero-avatar{width:96px;height:96px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:#fff;flex-shrink:0;font-weight:600}
+.hero-content{}
+.hero-name{font-family:var(--serif);font-size:2.6rem;font-weight:600;line-height:1.1;margin-bottom:.4rem;letter-spacing:-.02em;color:var(--text)}
+.hero-title{font-size:15px;font-weight:500;color:var(--accent);margin-bottom:.75rem}
+.hero-location{font-size:13px;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
+.hero-bio{font-size:14px;color:var(--muted);line-height:1.75;max-width:560px;margin-bottom:1.5rem}
+.hero-badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.75rem}
+.badge{font-size:12px;font-weight:500;padding:.3rem .75rem;border-radius:999px;background:#1a2540;color:#4f8ef7}
+.badge.green{background:#0f2a1a;color:#4ade80}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;font-size:13px;font-weight:500;text-decoration:none;padding:.6rem 1.5rem;border-radius:6px;transition:background .2s}
+.btn-primary:hover{background:#1e40af}
+.btn-secondary{background:#1e1e1e;color:#f0ede8;font-size:13px;font-weight:500;text-decoration:none;padding:.6rem 1.5rem;border-radius:6px;border:1px solid #2a2a2a;transition:all .2s}
+.btn-secondary:hover{border-color:#4f8ef7;color:#4f8ef7}
+
+/* MAIN LAYOUT */
+.layout{max-width:900px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:1fr 280px;gap:3rem;padding-top:3rem;padding-bottom:4rem}
+.main-col{}
+.side-col{}
+
+/* SECTION */
+.sec{margin-bottom:3rem}
+.sec-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+
+/* EXPERIENCE */
+.exp-item{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.exp-item:last-child{border-bottom:none}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.exp-role{font-size:15px;font-weight:600;color:var(--text)}
+.exp-period{font-size:12px;color:var(--muted);white-space:nowrap}
+.exp-company{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:.5rem}
+.exp-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:.75rem}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.exp-tag{font-size:11px;background:#1e1e1e;color:#f0ede8;border:1px solid #2a2a2a;padding:.2rem .6rem;border-radius:4px}
+
+/* PROJECTS */
+.project-item{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.project-item:last-child{border-bottom:none}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem;gap:1rem}
+.project-name{font-size:15px;font-weight:600;color:var(--text)}
+.project-link{font-size:12px;color:var(--accent);text-decoration:none;white-space:nowrap;font-weight:500}
+.project-link:hover{text-decoration:underline}
+.project-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:.75rem}
+.project-tech{display:flex;flex-wrap:wrap;gap:.4rem}
+.tech-tag{font-size:11px;background:#1e1e1e;color:#9ca3af;border:1px solid #2a2a2a;padding:.2rem .55rem;border-radius:4px}
+
+/* SIDEBAR */
+.side-card{background:#161616;border:1px solid #2a2a2a;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.side-card-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.skill-group{margin-bottom:1rem}
+.skill-group:last-child{margin-bottom:0}
+.skill-group-label{font-size:11px;font-weight:600;color:#f0ede8;margin-bottom:.5rem}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.35rem}
+.skill-pill{font-size:11px;background:#242424;border:1px solid #333;color:#9ca3af;padding:.25rem .6rem;border-radius:4px}
+
+/* CERTS */
+.cert-item{display:flex;gap:.75rem;padding:.75rem 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.cert-item:last-child{border-bottom:none}
+.cert-num{width:26px;height:26px;background:#1a2540;color:#4f8ef7;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.cert-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:.2rem}
+.cert-meta{font-size:11px;color:var(--muted)}
+
+/* CONTACT CARD */
+.contact-row{display:flex;align-items:center;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--line);text-decoration:none}
+.contact-row:last-child{border-bottom:none}
+.contact-icon{width:28px;height:28px;border-radius:6px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--accent);flex-shrink:0}
+.contact-info{}
+.contact-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.contact-val{font-size:13px;color:var(--text);font-weight:400}
+.contact-row:hover .contact-val{color:var(--accent)}
+
+/* AVAIL BADGE */
+.avail-banner{background:#0f2a1a;border:1px solid #166534;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.avail-dot{width:8px;height:8px;background:#16a34a;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.avail-text{font-size:13px;color:#4ade80;font-weight:500}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:1.5rem 2.5rem;max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.footer-text{font-size:12px;color:var(--muted)}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .hero{flex-direction:column;gap:1.5rem;padding:80px 1.25rem 3rem}
+  .layout{grid-template-columns:1fr;padding:0 1.25rem 3rem}
+  footer{flex-direction:column;gap:.5rem;padding:1.5rem 1.25rem}
+}
+</style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
-<div class="blob blob1"></div>
-<div class="blob blob2"></div>
-<div class="blob blob3"></div>
-
-<!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo">VVR</div>
-  <div class="nav-links">
-    <a href="#experience">Experience</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-    <a href="resume.html">Resume</a>
-  </div>
-  <a href="#contact" class="nav-hire">Hire Me →</a>
+  <a href="#" class="nav-logo">Vishnu Vardhan Rali</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="resume.html" class="nav-resume">Resume ↗</a>
 </nav>
 
-<!-- ── HERO ── -->
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">
-      <span></span>
-      Full Stack Developer — 2025
+<!-- HERO -->
+<div class="hero fade-in">
+  <div class="hero-avatar">VV</div>
+  <div class="hero-content">
+    <h1 class="hero-name">Vishnu Vardhan Rali</h1>
+    <div class="hero-title">Full Stack Developer</div>
+    <div class="hero-location">📍 Khammam, India · B.Tech Final Year</div>
+    <p class="hero-bio">Passionate Full Stack Developer with real-world internship experience, 7+ IBM certifications, and a drive to build products that matter. Seeking full-time developer roles in 2025.</p>
+    <div class="hero-badges">
+      <span class="badge green">● Available for Hire</span>
+      <span class="badge">HTML</span>
+      <span class="badge">CSS</span>
+      <span class="badge">JavaScript</span>
+      <span class="badge">SQL</span>
+      <span class="badge">MongoDB</span>
+      <span class="badge">Git</span>
+      <span class="badge">GitHub</span>
+      <span class="badge">Java</span>
+      <span class="badge">Python</span>
+      <span class="badge">Java</span>
     </div>
-    <h1>
-      <span class="line1">Vishnu</span>
-      <span class="line2">Vardhan</span>
-      <span class="line3">Rali</span>
-    </h1>
-    <p class="hero-role">B.Tech Final Year &nbsp;·&nbsp; <strong>Khammam, India</strong></p>
-    <p class="hero-desc">
-      A passionate Full Stack Developer with real-world internship experience, multiple certifications, and a drive to build products that matter. Looking for full-time developer roles.
-    </p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-glow">Let's Connect →</a>
-      <a href="#experience" class="btn-ghost">View Experience</a>
+    <div class="hero-cta">
+      <a href="mailto:ralivishnu565@gmail.com" class="btn-primary">Contact Me</a>
+      <a href="https://github.com/VishnuRali" target="_blank" class="btn-secondary">GitHub →</a>
+      <a href="https://www.linkedin.com/in/vishnuvardhanrali" target="_blank" class="btn-secondary">LinkedIn →</a>
     </div>
   </div>
+</div>
 
-  <div class="hero-right">
-    <div class="hero-card" id="heroCard">
-      <div class="hero-card-inner" id="heroCardInner">
-        <div class="hero-card-face">
-          <!-- 
-            PHOTO: To add your photo, place it in images/profile.jpg
-            and uncomment the <img> tag below, then remove the "VC" text.
-          -->
-          <div class="card-avatar">
-            <!-- <img src="images/profile.jpg" alt="Vishnu Cardhan Rali"/> -->
-            VV
-          </div>
-          <div class="card-status">
-            <div class="status-dot"></div>
-            Available for hire
-          </div>
-          <div class="card-name">Vishnu Vardhan Rali</div>
-          <div class="card-title">Full Stack Developer</div>
-          <div class="card-stats">
-            <div class="card-stat">
-              <div class="card-stat-num">1+</div>
-              <div class="card-stat-label">Internship</div>
-            </div>
-            <div class="card-stat">
-              <div class="card-stat-num">5+</div>
-              <div class="card-stat-label">Certs</div>
-            </div>
-            <div class="card-stat">
-              <div class="card-stat-num">4th</div>
-              <div class="card-stat-label">Year</div>
-            </div>
-            <div class="card-stat">
-              <div class="card-stat-num">∞</div>
-              <div class="card-stat-label">Learning</div>
-            </div>
-          </div>
+<div class="layout">
+
+  <!-- MAIN COLUMN -->
+  <div class="main-col">
+
+    <!-- EXPERIENCE -->
+    <div class="sec fade-in" id="experience">
+      <div class="sec-title">Experience</div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Full Stack Developer Intern</div>
+          <div class="exp-period">2025</div>
+        </div>
+        <div class="exp-company">Full Stack Development Program · Hyderabad, India</div>
+        <p class="exp-desc">Built and deployed full stack web applications using modern technologies. Designed responsive UIs, developed backend REST APIs, and connected databases. Worked in a team environment following industry-standard development practices.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">React.js</span>
+          <span class="exp-tag">Node.js</span>
+          <span class="exp-tag">Express.js</span>
+          <span class="exp-tag">MongoDB</span>
+          <span class="exp-tag">JavaScript</span>
+          <span class="exp-tag">Git</span>
+          <span class="exp-tag">REST APIs</span>
         </div>
       </div>
     </div>
+
+    <!-- PROJECTS -->
+    <div class="sec fade-in" id="projects">
+      <div class="sec-title">Projects</div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">QuickBite — Food Delivery App</div>
+          <a href="https://github.com/VishnuRali/quickbite-app" target="_blank" class="project-link">GitHub ↗</a>
+        </div>
+        <p class="project-desc">Full stack food delivery application with user authentication, real-time order management, and restaurant listings. Built using the MERN stack with Firebase integration.</p>
+        <div class="project-tech">
+          <span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Firebase</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">Real Estate Management Software</div>
+          <a href="https://github.com/VishnuRali/realestate-management-software-main" target="_blank" class="project-link">GitHub ↗</a>
+        </div>
+        <p class="project-desc">Property management system to handle listings, tenant records, and transactions with a Python backend.</p>
+        <div class="project-tech"><span class="tech-tag">Python</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">TaskFlow — Backend API</div>
+          <a href="https://github.com/VishnuRali/taskflow-backend" target="_blank" class="project-link">GitHub ↗</a>
+        </div>
+        <p class="project-desc">RESTful task management backend with full CRUD operations and clean, documented API architecture.</p>
+        <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">Future Intern FS — Project 01</div>
+          <a href="https://futuree-fs-01.netlify.app/" target="_blank" class="project-link">Live Demo ↗</a>
+        </div>
+        <p class="project-desc">Frontend project built and deployed as part of the Future Intern Full Stack development program.</p>
+        <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">Future Intern FS — Project 02</div>
+          <a href="https://futuree-fs-02.netlify.app/" target="_blank" class="project-link">Live Demo ↗</a>
+        </div>
+        <p class="project-desc">Second full stack project from the Future Intern program featuring a JavaScript-heavy modern frontend.</p>
+        <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">CSS</span></div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="sec fade-in" id="certifications">
+      <div class="sec-title">Certifications</div>
+      <div class="cert-item"><div class="cert-num">01</div><div><div class="cert-name">Software Engineering &amp; Coding</div><div class="cert-meta">IBM SkillsBuild · Feb 13, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">02</div><div><div class="cert-name">Web Development Basics</div><div class="cert-meta">IBM SkillsBuild · Feb 15, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">03</div><div><div class="cert-name">Artificial Intelligence in Practice</div><div class="cert-meta">IBM SkillsBuild · Feb 13, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">04</div><div><div class="cert-name">What is Artificial Intelligence?</div><div class="cert-meta">IBM SkillsBuild · Feb 13, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">05</div><div><div class="cert-name">What is Cloud Computing?</div><div class="cert-meta">IBM SkillsBuild · Feb 15, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">06</div><div><div class="cert-name">Managing Projects in a Digital Environment</div><div class="cert-meta">IBM SkillsBuild · Feb 13, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">07</div><div><div class="cert-name">Online Security</div><div class="cert-meta">IBM SkillsBuild · Feb 13, 2025 · Verified</div></div></div>
+      <div class="cert-item"><div class="cert-num">🏢</div><div><div class="cert-name">Internship Certificate — Full Stack Developer</div><div class="cert-meta">Hyderabad, India · 2025 · Earned</div></div></div>
+    </div>
+
+  </div>
+
+  <!-- SIDE COLUMN -->
+  <div class="side-col fade-in" style="transition-delay:.15s">
+
+    <div class="avail-banner">
+      <div class="avail-dot"></div>
+      <div class="avail-text">Open to full-time roles in 2025</div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="side-card" id="contact">
+      <div class="side-card-title">Contact</div>
+      <a href="mailto:ralivishnu565@gmail.com" class="contact-row">
+        <div class="contact-icon">✉</div>
+        <div class="contact-info"><div class="contact-label">Email</div><div class="contact-val">ralivishnu565@gmail.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/vishnuvardhanrali" target="_blank" class="contact-row">
+        <div class="contact-icon">in</div>
+        <div class="contact-info"><div class="contact-label">LinkedIn</div><div class="contact-val">vishnuvardhanrali</div></div>
+      </a>
+      <a href="https://github.com/VishnuRali" target="_blank" class="contact-row">
+        <div class="contact-icon">gh</div>
+        <div class="contact-info"><div class="contact-label">GitHub</div><div class="contact-val">VishnuRali</div></div>
+      </a>
+      <a href="https://vishnuvardhanrali.com/resume.html" target="_blank" class="contact-row">
+        <div class="contact-icon">↗</div>
+        <div class="contact-info"><div class="contact-label">Resume</div><div class="contact-val">View Resume</div></div>
+      </a>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="side-card">
+      <div class="side-card-title">Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-pills">
+          <span class="skill-pill">HTML</span>
+          <span class="skill-pill">CSS</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">Python (basic)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Database</div>
+        <div class="skill-pills">
+          <span class="skill-pill">MongoDB</span>
+          <span class="skill-pill">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">GitHub</span>
+          <span class="skill-pill">VS Code</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="side-card">
+      <div class="side-card-title">Education</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem">B.Tech — Final Year</div>
+      <div style="font-size:13px;color:var(--accent);margin-bottom:.25rem;font-weight:500">Computer Science / IT</div>
+      <div style="font-size:12px;color:var(--muted)">Khammam, India · 2025</div>
+    </div>
+
   </div>
 </div>
-
-<!-- ── MARQUEE ── -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item"><span class="marquee-dot">◆</span>React.js</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Node.js</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Full Stack</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>JavaScript</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>HTML &amp; CSS</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Git &amp; GitHub</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>REST APIs</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>MongoDB</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Express.js</div>
-    <!-- duplicate for seamless loop -->
-    <div class="marquee-item"><span class="marquee-dot">◆</span>React.js</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Node.js</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Full Stack</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>JavaScript</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>HTML &amp; CSS</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Git &amp; GitHub</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>REST APIs</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>MongoDB</div>
-    <div class="marquee-item"><span class="marquee-dot">◆</span>Express.js</div>
-  </div>
-</div>
-
-<!-- ── EXPERIENCE ── -->
-<section class="section" id="experience">
-  <div class="section-head">
-    <div class="section-eyebrow">Experience</div>
-    <h2 class="section-title">Where I've<br/>Made an Impact</h2>
-  </div>
-
-  <div class="exp-card">
-    <div class="exp-top">
-      <div class="exp-role">Full Stack Developer Intern</div>
-      <span class="exp-pill">Certificate Earned</span>
-    </div>
-    <div class="exp-meta">Full Stack Development Program &nbsp;·&nbsp; Hyderabad, India</div>
-    <p class="exp-body">
-      Gained hands-on experience building and deploying full stack web applications. Worked with modern technologies across the entire development stack — from designing responsive UIs to building backend APIs and connecting databases. Collaborated in a team environment following industry-standard development practices.
-    </p>
-    <div class="exp-tags">
-      <span class="exp-tag">React.js</span>
-      <span class="exp-tag">Node.js</span>
-      <span class="exp-tag">JavaScript</span>
-      <span class="exp-tag">Express.js</span>
-      <span class="exp-tag">MongoDB</span>
-      <span class="exp-tag">Git</span>
-      <span class="exp-tag">REST APIs</span>
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider"/>
-
-<!-- ── CERTIFICATIONS ── -->
-<section class="section" id="certifications">
-  <div class="section-head">
-    <div class="section-eyebrow">Certifications</div>
-    <h2 class="section-title">Proof of My<br/>Commitment</h2>
-    <p style="color:var(--muted2);font-size:14px;margin-top:12px;">IBM SkillsBuild · Verified · Feb 2025</p>
-  </div>
-
-  <!-- INTERNSHIP COMING SOON BANNER -->
-  <div class="internship-soon">
-    <div class="internship-soon-left">
-      <div class="coming-soon-pulse"></div>
-      <div>
-        <div class="internship-soon-title">🏢 Internship Certificate</div>
-        <div class="internship-soon-sub">Full Stack Developer Intern · Hyderabad, India</div>
-      </div>
-    </div>
-    <div class="coming-soon-badge">Coming Soon</div>
-  </div>
-
-  <div class="cert-grid">
-
-    <!-- CERT 1 — Software Engineering & Coding -->
-    <div class="cert-card">
-      <div class="cert-num">01</div>
-      <div class="cert-icon-wrap" style="background:rgba(0,255,240,0.08);border:1px solid rgba(0,255,240,0.15)">⚡</div>
-      <div class="cert-name">Software Engineering &amp; Coding</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 13, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ 25 mins</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 2 — Web Development Basics -->
-    <div class="cert-card">
-      <div class="cert-num">02</div>
-      <div class="cert-icon-wrap" style="background:rgba(123,47,255,0.08);border:1px solid rgba(123,47,255,0.15)">🌐</div>
-      <div class="cert-name">Web Development Basics</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 15, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ 1 hr 40 mins</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 3 — AI in Practice -->
-    <div class="cert-card">
-      <div class="cert-num">03</div>
-      <div class="cert-icon-wrap" style="background:rgba(255,47,123,0.08);border:1px solid rgba(255,47,123,0.15)">🤖</div>
-      <div class="cert-name">Artificial Intelligence in Practice</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 13, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ IBM Learning</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 4 — What is AI -->
-    <div class="cert-card">
-      <div class="cert-num">04</div>
-      <div class="cert-icon-wrap" style="background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.15)">🧠</div>
-      <div class="cert-name">What is Artificial Intelligence?</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 13, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ IBM Learning</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 5 — Cloud Computing -->
-    <div class="cert-card">
-      <div class="cert-num">05</div>
-      <div class="cert-icon-wrap" style="background:rgba(255,200,0,0.08);border:1px solid rgba(255,200,0,0.15)">☁️</div>
-      <div class="cert-name">What is Cloud Computing?</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 15, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ IBM Learning</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 6 — Managing Projects -->
-    <div class="cert-card">
-      <div class="cert-num">06</div>
-      <div class="cert-icon-wrap" style="background:rgba(123,47,255,0.08);border:1px solid rgba(123,47,255,0.15)">📋</div>
-      <div class="cert-name">Managing Projects in a Digital Environment</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 13, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ 20 mins</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 7 — Online Security -->
-    <div class="cert-card">
-      <div class="cert-num">07</div>
-      <div class="cert-icon-wrap" style="background:rgba(0,255,240,0.08);border:1px solid rgba(0,255,240,0.15)">🔒</div>
-      <div class="cert-name">Online Security</div>
-      <div class="cert-org">IBM SkillsBuild · Feb 13, 2025</div>
-      <div class="cert-meta-row">
-        <span class="cert-hours">⏱ 25 mins</span>
-        <div class="cert-badge">Verified</div>
-      </div>
-    </div>
-
-    <!-- CERT 8 — More coming -->
-    <div class="cert-card" style="border-style:dashed;opacity:0.4">
-      <div class="cert-num">+</div>
-      <div class="cert-icon-wrap" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">⋯</div>
-      <div class="cert-name">More certifications</div>
-      <div class="cert-org">Continuously upskilling</div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="section-divider"/>
-
-<!-- ── SKILLS ── -->
-<section class="section" id="skills">
-  <div class="section-head">
-    <div class="section-eyebrow">Skills</div>
-    <h2 class="section-title">What I Bring<br/>to the Table</h2>
-  </div>
-
-  <div class="skills-container">
-    <div class="skill-group">
-      <div class="skill-group-label" style="color:var(--c1)">Frontend</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c1)"></div>HTML5 &amp; CSS3</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c1)"></div>JavaScript ES6+</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c1)"></div>React.js</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c1)"></div>Responsive Design</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c1)"></div>CSS Animations</div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-label" style="color:var(--c2)">Backend</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c2)"></div>Node.js</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c2)"></div>Express.js</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c2)"></div>REST APIs</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c2)"></div>MongoDB</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c2)"></div>MySQL</div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-label" style="color:var(--c3)">Tools &amp; Practices</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c3)"></div>Git &amp; GitHub</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c3)"></div>VS Code</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c3)"></div>Agile Basics</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c3)"></div>Problem Solving</div>
-      <div class="skill-item"><div class="skill-dot" style="background:var(--c3)"></div>Team Collaboration</div>
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider"/>
-
-<!-- ── CONTACT ── -->
-<section class="section" id="contact">
-  <div class="contact-wrap">
-    <div class="contact-title">Let's Build<br/>Something Great</div>
-    <p class="contact-sub">I'm actively seeking full-time developer roles in 2025. If you're hiring or know someone who is — let's talk!</p>
-    <div class="contact-links">
-      <a href="mailto:ralivishnu565@gmaill.com" class="contact-link">📧 Email Me</a>
-      <a href="https://www.linkedin.com/in/vishnuvardhanrali" target="_blank" class="contact-link">💼 LinkedIn</a>
-      <a href="#" class="contact-link">🐙 GitHub</a>
-      <a href="resume.html" target="_blank" class="contact-link">📄 Resume</a>
-    </div>
-  </div>
-</section>
 
 <footer>
-  <p>Designed &amp; Coded by <strong style="color:var(--c1)">Vishnu Vardhan Rali</strong> &nbsp;·&nbsp; Full Stack Developer &nbsp;·&nbsp; Khammam 🇮🇳</p>
+  <span class="footer-text">Vishnu Vardhan Rali · Full Stack Developer · Khammam, India 🇮🇳</span>
+  <span class="footer-text">© 2025</span>
 </footer>
 
-<script src="script.js"></script>
+<script>
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
