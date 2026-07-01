@@ -2,8 +2,8 @@
   "hero": {
     "name": "Vishnu Vardhan Rali",
     "title": "Full Stack Developer",
-    "location": "\ud83d\udccd Khammam, India \u00b7 B.Tech Final Year",
-    "bio": "Passionate Full Stack Developer with real-world internship experience, 7+ IBM certifications, and a drive to build products that matter. Seeking full-time developer roles in 2025.",
+    "location": "📍 Khammam, India · B.Tech Final Year",
+    "bio": "Passionate Full Stack Developer with real-world internship experience, 7+ IBM certifications, and a drive to build products that matter. Seeking full-time developer roles in 2026.",
     "availabilityBadge": "● Available for Hire",
     "badges": [
       "HTML",
@@ -27,8 +27,8 @@
   "experience": [
     {
       "role": "Full Stack Developer Intern",
-      "period": "2025",
-      "company": "Full Stack Development Program \u00b7 Hyderabad, India",
+      "period": "2026",
+      "company": "Full Stack Development Program · Hyderabad, India",
       "description": "Built and deployed full stack web applications using modern technologies. Designed responsive UIs, developed backend REST APIs, and connected databases. Worked in a team environment following industry-standard development practices.",
       "tags": [
         "HTML",
@@ -47,8 +47,8 @@
   ],
   "projects": [
     {
-      "name": "QuickBite \u2014 Food Delivery App",
-      "linkLabel": "GitHub \u2197",
+      "name": "QuickBite — Food Delivery App",
+      "linkLabel": "GitHub ↗",
       "linkUrl": "https://github.com/VishnuRali/quickbite-app",
       "description": "Full stack food delivery application with user authentication, real-time order management, and restaurant listings. Built using the MERN stack with Firebase integration.",
       "tech": [
@@ -61,7 +61,7 @@
     },
     {
       "name": "Real Estate Management Software",
-      "linkLabel": "GitHub \u2197",
+      "linkLabel": "GitHub ↗",
       "linkUrl": "https://github.com/VishnuRali/realestate-management-software-main",
       "description": "Property management system to handle listings, tenant records, and transactions with a Python backend.",
       "tech": [
@@ -69,8 +69,8 @@
       ]
     },
     {
-      "name": "TaskFlow \u2014 Backend API",
-      "linkLabel": "GitHub \u2197",
+      "name": "TaskFlow — Backend API",
+      "linkLabel": "GitHub ↗",
       "linkUrl": "https://github.com/VishnuRali/taskflow-backend",
       "description": "RESTful task management backend with full CRUD operations and clean, documented API architecture.",
       "tech": [
@@ -80,8 +80,8 @@
       ]
     },
     {
-      "name": "Future Intern FS \u2014 Project 01",
-      "linkLabel": "Live Demo \u2197",
+      "name": "Future Intern FS — Project 01",
+      "linkLabel": "Live Demo ↗",
       "linkUrl": "https://futuree-fs-01.netlify.app/",
       "description": "Frontend project built and deployed as part of the Future Intern Full Stack development program.",
       "tech": [
@@ -91,8 +91,8 @@
       ]
     },
     {
-      "name": "Future Intern FS \u2014 Project 02",
-      "linkLabel": "Live Demo \u2197",
+      "name": "Future Intern FS — Project 02",
+      "linkLabel": "Live Demo ↗",
       "linkUrl": "https://futuree-fs-02.netlify.app/",
       "description": "Second full stack project from the Future Intern program featuring a JavaScript-heavy modern frontend.",
       "tech": [
@@ -235,13 +235,13 @@
     ]
   },
   "education": {
-    "degree": "B.Tech \u2014 Final Year",
+    "degree": "B.Tech — Final Year",
     "field": "Computer Science / IT",
-    "meta": "Khammam, India \u00b7 2025"
+    "meta": "Khammam, India · 2026"
   },
   "footer": {
-    "left": "Vishnu Vardhan Rali \u00b7 Full Stack Developer \u00b7 Khammam, India \ud83c\uddee\ud83c\uddf3",
-    "right": "\u00a9 2025"
+    "left": "Vishnu Vardhan Rali · Full Stack Developer · Khammam, India 🇮🇳",
+    "right": "© 2026"
   },
   "resume": {
     "filename": "RALI_VISHNU_VARDHAN_RESUME_.pdf",
@@ -252,19 +252,19 @@
     "phone": "7095119246",
     "education": [
       {
-        "degree": "B.Tech \u2014 Computer Science & Engineering",
+        "degree": "B.Tech — Computer Science & Engineering",
         "school": "Swarna Bharathi Institute of Science and Technology",
-        "board": "Currently Pursuing \u00b7 4th Year",
+        "board": "Currently Pursuing · 4th Year",
         "score": "Final Year"
       },
       {
-        "degree": "12th \u2014 Intermediate (PCM)",
+        "degree": "12th — Intermediate (PCM)",
         "school": "Sri Chaitanya Jr Arts and Science College",
         "board": "Telangana State Board of Intermediate Education",
         "score": "Score: 80%"
       },
       {
-        "degree": "10th \u2014 SSC",
+        "degree": "10th — SSC",
         "school": "Antarwani Vidyaniketan, Khammam",
         "board": "Board of Secondary Education",
         "score": "CGPA: 8.8"
