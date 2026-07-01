@@ -104,17 +104,17 @@
   "featuredExperience": {
     "items": [
       {
-        "id": "feat-01",
+        "id": "THX-MAY1326-314",
         "title": "Full Stack Developer Internship",
         "type": "Internship",
-        "organization": "Future Intern",
-        "location": "Hyderabad",
-        "date": "Jun 2025",
+        "organization": "Thiranex",
+        "location": "Khammam",
+        "date": "May 2025",
         "badge": "Internship",
         "initials": "FI",
-        "description": "Built and shipped full stack web apps end-to-end with direct mentorship on production-grade practices.",
+        "description": "Developed and delivered full-stack web applications during a structured internship program. Built projects including a Task Management App, E-Commerce Web Application, and Blog Platform using HTML, CSS, JavaScript, React.js, MongoDB, and SQL. Gained hands-on experience in both frontend and backend development through industry-based projects.",
         "image": "images/featured-feat-01.jpg",
-        "credentialUrl": "",
+        "credentialUrl": "https://www.thiranex.in/?verifyId=THX-MAY1326-314",
         "verificationUrl": "",
         "verified": true
       },
