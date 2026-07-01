@@ -1,0 +1,219 @@
+{
+  "hero": {
+    "name": "Vishnu Vardhan Rali",
+    "title": "Full Stack Developer",
+    "location": "📍 Khammam, India · B.Tech Final Year",
+    "bio": "Passionate Full Stack Developer with real-world internship experience, 7+ IBM certifications, and a drive to build products that matter. Seeking full-time developer roles in 2025.",
+    "availabilityBadge": "● Available for Hire",
+    "badges": ["HTML", "CSS", "JavaScript", "SQL", "MongoDB", "Git", "GitHub", "Java", "Python", "Responsive Design"]
+  },
+  "ctas": {
+    "email": "ralivishnu565@gmail.com",
+    "github": "https://github.com/VishnuRali",
+    "linkedin": "https://www.linkedin.com/in/vishnuvardhanrali"
+  },
+  "availabilityBanner": "Open to full-time roles in 2025",
+  "experience": [
+    {
+      "role": "Full Stack Developer Intern",
+      "period": "2025",
+      "company": "Full Stack Development Program · Hyderabad, India",
+      "description": "Built and deployed full stack web applications using modern technologies. Designed responsive UIs, developed backend REST APIs, and connected databases. Worked in a team environment following industry-standard development practices.",
+      "tags": ["HTML", "CSS", "SQL", "GitHub", "Java", "Python", "React.js", "Node.js", "MongoDB", "JavaScript", "Git"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "QuickBite — Food Delivery App",
+      "linkLabel": "GitHub ↗",
+      "linkUrl": "https://github.com/VishnuRali/quickbite-app",
+      "description": "Full stack food delivery application with user authentication, real-time order management, and restaurant listings. Built using the MERN stack with Firebase integration.",
+      "tech": ["React", "Node.js", "Express", "MongoDB", "Firebase"]
+    },
+    {
+      "name": "Real Estate Management Software",
+      "linkLabel": "GitHub ↗",
+      "linkUrl": "https://github.com/VishnuRali/realestate-management-software-main",
+      "description": "Property management system to handle listings, tenant records, and transactions with a Python backend.",
+      "tech": ["Python"]
+    },
+    {
+      "name": "TaskFlow — Backend API",
+      "linkLabel": "GitHub ↗",
+      "linkUrl": "https://github.com/VishnuRali/taskflow-backend",
+      "description": "RESTful task management backend with full CRUD operations and clean, documented API architecture.",
+      "tech": ["JavaScript", "Node.js", "Express"]
+    },
+    {
+      "name": "Future Intern FS — Project 01",
+      "linkLabel": "Live Demo ↗",
+      "linkUrl": "https://futuree-fs-01.netlify.app/",
+      "description": "Frontend project built and deployed as part of the Future Intern Full Stack development program.",
+      "tech": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "name": "Future Intern FS — Project 02",
+      "linkLabel": "Live Demo ↗",
+      "linkUrl": "https://futuree-fs-02.netlify.app/",
+      "description": "Second full stack project from the Future Intern program featuring a JavaScript-heavy modern frontend.",
+      "tech": ["JavaScript", "CSS"]
+    }
+  ],
+  "featuredExperience": {
+    "items": [
+      {
+        "title": "Full Stack Developer Internship",
+        "organization": "Future Intern · Hyderabad",
+        "date": "Jun 2025",
+        "badge": "Internship",
+        "initials": "FI",
+        "description": "Built and shipped full stack web apps end-to-end with direct mentorship on production-grade practices.",
+        "image": "",
+        "verificationUrl": ""
+      },
+      {
+        "title": "Future Intern Program",
+        "organization": "Future Intern",
+        "date": "Mar 2025",
+        "badge": "Program",
+        "initials": "FI",
+        "description": "Completed the Future Intern Full Stack track, delivering two production-ready frontend projects.",
+        "image": "",
+        "verificationUrl": ""
+      }
+    ]
+  },
+  "certifications": [
+    {
+      "id": "cert-ibm-01",
+      "title": "Software Engineering & Coding",
+      "organization": "IBM SkillsBuild",
+      "description": "Foundations of software engineering principles, coding practices, and problem-solving methodologies.",
+      "date": "Feb 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    },
+    {
+      "id": "cert-ibm-02",
+      "title": "Web Development Basics",
+      "organization": "IBM SkillsBuild",
+      "description": "Core concepts of web development including HTML, CSS, and modern browser technologies.",
+      "date": "Feb 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    },
+    {
+      "id": "cert-ibm-03",
+      "title": "Artificial Intelligence in Practice",
+      "organization": "IBM SkillsBuild",
+      "description": "Practical applications of artificial intelligence and machine learning in real-world scenarios.",
+      "date": "Mar 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    },
+    {
+      "id": "cert-ibm-04",
+      "title": "What Is Artificial Intelligence?",
+      "organization": "IBM SkillsBuild",
+      "description": "Introduction to AI concepts, history, and the future landscape of intelligent systems.",
+      "date": "Mar 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    },
+    {
+      "id": "cert-ibm-05",
+      "title": "What Is Cloud Computing?",
+      "organization": "IBM SkillsBuild",
+      "description": "Overview of cloud computing models, infrastructure, and enterprise cloud adoption strategies.",
+      "date": "Apr 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    },
+    {
+      "id": "cert-ibm-06",
+      "title": "Managing Projects in a Digital Environment",
+      "organization": "IBM SkillsBuild",
+      "description": "Project management frameworks, digital tools, and agile methodologies for modern teams.",
+      "date": "Apr 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    },
+    {
+      "id": "cert-ibm-07",
+      "title": "Online Security",
+      "organization": "IBM SkillsBuild",
+      "description": "Cybersecurity fundamentals, threat awareness, and best practices for safe digital environments.",
+      "date": "May 2025",
+      "image": "",
+      "verificationUrl": "",
+      "verified": true
+    }
+  ],
+  "contact": {
+    "email": "ralivishnu565@gmail.com",
+    "linkedinHandle": "vishnuvardhanrali",
+    "linkedinUrl": "https://www.linkedin.com/in/vishnuvardhanrali",
+    "githubHandle": "VishnuRali",
+    "githubUrl": "https://github.com/VishnuRali",
+    "resumeUrl": "https://vishnuvardhanrali.com/resume.html"
+  },
+  "skills": {
+    "Languages": ["HTML", "CSS", "JavaScript", "Java", "SQL", "Python (basic)"],
+    "Database": ["MongoDB", "SQL"],
+    "Tools": ["Git", "GitHub", "VS Code"]
+  },
+  "education": {
+    "degree": "B.Tech — Final Year",
+    "field": "Computer Science / IT",
+    "meta": "Khammam, India · 2025"
+  },
+  "footer": {
+    "left": "Vishnu Vardhan Rali · Full Stack Developer · Khammam, India 🇮🇳",
+    "right": "© 2025"
+  },
+  "resume": {
+    "filename": "RALI_VISHNU_VARDHAN_RESUME_.pdf",
+    "downloadUrl": "/RALI_VISHNU_VARDHAN_RESUME_.pdf"
+  },
+  "resumeContent": {
+    "objective": "Motivated and enthusiastic fresher with hands-on knowledge of HTML, CSS, JavaScript, and Java. Seeking a full-time opportunity to grow as a Full Stack Developer and build impactful products that solve real-world problems.",
+    "phone": "7095119246",
+    "education": [
+      {
+        "degree": "B.Tech — Computer Science & Engineering",
+        "school": "Swarna Bharathi Institute of Science and Technology",
+        "board": "Currently Pursuing · 4th Year",
+        "score": "Final Year"
+      },
+      {
+        "degree": "12th — Intermediate (PCM)",
+        "school": "Sri Chaitanya Jr Arts and Science College",
+        "board": "Telangana State Board of Intermediate Education",
+        "score": "Score: 80%"
+      },
+      {
+        "degree": "10th — SSC",
+        "school": "Antarwani Vidyaniketan, Khammam",
+        "board": "Board of Secondary Education",
+        "score": "CGPA: 8.8"
+      }
+    ],
+    "languages": [
+      { "name": "English", "level": "Fluent" },
+      { "name": "Hindi", "level": "Fluent" },
+      { "name": "Telugu", "level": "Native" }
+    ],
+    "strengths": [
+      "Good Interpersonal Skills",
+      "Multilingual Communicator",
+      "Quick Learner & Adaptable",
+      "Eager to Learn New Tech"
+    ]
+  }
+}

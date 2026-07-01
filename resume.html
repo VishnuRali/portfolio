@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rali Vishnu Vardhan — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;
+  --bg2:#161616;
+  --bg3:#1e1e1e;
+  --line:#2a2a2a;
+  --text:#f0ede8;
+  --muted:#6b7280;
+  --accent:#4f8ef7;
+  --accent-light:#1a2540;
+  --serif:'Playfair Display',serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bottom:1px solid var(--line);padding:0 2.5rem;display:flex;justify-content:space-between;align-items:center;height:60px}
+.nav-logo{font-size:14px;font-weight:600;color:var(--text);text-decoration:none}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-back{font-size:13px;color:var(--muted);text-decoration:none;font-weight:400;transition:color .2s;border:1px solid var(--line);padding:.4rem 1rem;border-radius:6px}
+.btn-back:hover{color:var(--text);border-color:#444}
+.btn-download{font-size:13px;font-weight:500;color:#fff;background:var(--accent);text-decoration:none;padding:.45rem 1.1rem;border-radius:6px;transition:background .2s}
+.btn-download:hover{background:#3b7de8}
+
+/* PAGE */
+.page{max-width:860px;margin:0 auto;padding:80px 2.5rem 4rem}
+
+/* HEADER */
+.resume-header{padding:2.5rem 0 2rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap}
+.rh-left{}
+.avail-pill{display:inline-flex;align-items:center;gap:.5rem;background:#0f2a1a;border:1px solid #166534;color:#4ade80;font-size:11px;font-weight:500;padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem;letter-spacing:.04em}
+.avail-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.resume-name{font-family:var(--serif);font-size:2.4rem;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:.35rem}
+.resume-title{font-size:14px;color:var(--accent);font-weight:500;margin-bottom:.5rem}
+.resume-location{font-size:13px;color:var(--muted)}
+.rh-right{display:flex;flex-direction:column;gap:.6rem;align-items:flex-end}
+.contact-item{display:flex;align-items:center;gap:.6rem;font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.contact-item:hover{color:var(--text)}
+.contact-item span{font-size:14px}
+
+/* LAYOUT */
+.resume-body{display:grid;grid-template-columns:1fr 260px;gap:3rem;padding-top:2.5rem}
+.main-col{}
+.side-col{}
+
+/* SECTION */
+.sec{margin-bottom:2.5rem}
+.sec-title{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+
+/* OBJECTIVE */
+.objective-text{font-size:14px;color:var(--muted);line-height:1.8}
+
+/* EXPERIENCE / PROJECTS */
+.item{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:none}
+.item-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.2rem}
+.item-title{font-size:14px;font-weight:600;color:var(--text)}
+.item-period{font-size:11px;color:var(--muted);white-space:nowrap;background:var(--bg3);border:1px solid var(--line);padding:.2rem .6rem;border-radius:4px}
+.item-sub{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:.5rem}
+.item-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:.75rem}
+.item-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-size:11px;background:#242424;color:#9ca3af;border:1px solid #333;padding:.2rem .55rem;border-radius:4px}
+
+/* EDUCATION */
+.edu-item{padding:1rem 0;border-bottom:1px solid var(--line)}
+.edu-item:last-child{border-bottom:none}
+.edu-degree{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.edu-school{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:.2rem}
+.edu-board{font-size:12px;color:var(--muted);margin-bottom:.2rem}
+.edu-score{font-size:12px;color:#4ade80;font-weight:500}
+
+/* SIDEBAR */
+.side-card{background:#161616;border:1px solid var(--line);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.side-title{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+
+/* SKILLS */
+.skill-group{margin-bottom:1rem}
+.skill-group:last-child{margin-bottom:0}
+.skill-label{font-size:11px;font-weight:600;color:#f0ede8;margin-bottom:.5rem}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.35rem}
+.skill-pill{font-size:11px;background:#242424;border:1px solid #333;color:#9ca3af;padding:.25rem .6rem;border-radius:4px}
+
+/* CERTS (sidebar list — compact view) */
+.cert-row{display:flex;gap:.75rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--line)}
+.cert-row:last-child{border-bottom:none}
+.cert-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;margin-top:5px;flex-shrink:0}
+.cert-name{font-size:13px;color:var(--text);line-height:1.4;margin-bottom:.15rem}
+.cert-meta{font-size:11px;color:var(--muted)}
+
+/* STRENGTHS */
+.strength-item{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.strength-item:last-child{border-bottom:none}
+.strength-item::before{content:'';width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0}
+
+/* LANGUAGES */
+.lang-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:13px}
+.lang-row:last-child{border-bottom:none}
+.lang-name{color:var(--text)}
+.lang-level{font-size:11px;color:var(--accent);background:var(--accent-light);padding:.2rem .55rem;border-radius:4px}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:700px){
+  nav{padding:0 1.25rem}
+  .page{padding:80px 1.25rem 3rem}
+  .resume-header{flex-direction:column;gap:1rem}
+  .rh-right{align-items:flex-start}
+  .resume-body{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vishnu Vardhan Rali</a>
+  <div class="nav-actions">
+    <a href="index.html" class="btn-back">← Portfolio</a>
+    <a href="/RALI_VISHNU_VARDHAN_RESUME_.pdf" target="_blank" class="btn-download" id="r-download-btn">⬇ Download PDF</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="resume-header fade-in">
+    <div class="rh-left">
+      <div class="avail-pill"><div class="avail-dot"></div> Available for Full-Time Roles</div>
+      <h1 class="resume-name" id="r-name">Rali Vishnu Vardhan</h1>
+      <div class="resume-title" id="r-title">Full Stack Developer · B.Tech CSE</div>
+      <div class="resume-location" id="r-location">📍 Khammam, Telangana, India</div>
+    </div>
+    <div class="rh-right" id="r-contact-block">
+      <a href="tel:7095119246" class="contact-item" id="r-phone"><span>📞</span> 7095119246</a>
+      <a href="mailto:ralivishnu565@gmail.com" class="contact-item" id="r-email"><span>✉</span> ralivishnu565@gmail.com</a>
+      <a href="https://github.com/VishnuRali" target="_blank" class="contact-item" id="r-github"><span>🐙</span> github.com/VishnuRali</a>
+      <a href="https://www.linkedin.com/in/vishnuvardhanrali" target="_blank" class="contact-item" id="r-linkedin"><span>💼</span> linkedin.com/in/vishnuvardhanrali</a>
+    </div>
+  </div>
+
+  <div class="resume-body">
+
+    <!-- MAIN -->
+    <div class="main-col">
+
+      <!-- OBJECTIVE -->
+      <div class="sec fade-in">
+        <div class="sec-title">Objective</div>
+        <p class="objective-text" id="r-objective">Motivated and enthusiastic fresher with hands-on knowledge of HTML, CSS, JavaScript, and Java. Seeking a full-time opportunity to grow as a Full Stack Developer and build impactful products that solve real-world problems.</p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="sec fade-in">
+        <div class="sec-title">Experience</div>
+        <div id="r-experience-list">
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">Full Stack Developer Intern</div>
+            <div class="item-period">2025</div>
+          </div>
+          <div class="item-sub">Full Stack Development Program · Hyderabad, India</div>
+          <p class="item-desc">Built and deployed full stack web applications using modern technologies. Designed responsive UIs, developed backend REST APIs, and connected databases. Worked in a team environment following industry-standard development practices.</p>
+          <div class="item-tags">
+            <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span>
+            <span class="tag">MongoDB</span><span class="tag">JavaScript</span><span class="tag">Git</span><span class="tag">REST APIs</span>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="sec fade-in">
+        <div class="sec-title">Education</div>
+        <div id="r-education-list">
+        <div class="edu-item">
+          <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
+          <div class="edu-school">Swarna Bharathi Institute of Science and Technology</div>
+          <div class="edu-board">Currently Pursuing · 4th Year</div>
+          <div class="edu-score">Final Year</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">12th — Intermediate (PCM)</div>
+          <div class="edu-school">Sri Chaitanya Jr Arts and Science College</div>
+          <div class="edu-board">Telangana State Board of Intermediate Education</div>
+          <div class="edu-score">Score: 80%</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">10th — SSC</div>
+          <div class="edu-school">Antarwani Vidyaniketan, Khammam</div>
+          <div class="edu-board">Board of Secondary Education</div>
+          <div class="edu-score">CGPA: 8.8</div>
+        </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="sec fade-in">
+        <div class="sec-title">Projects</div>
+        <div id="r-projects-list">
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">QuickBite — Food Delivery App</div>
+            <a href="https://github.com/VishnuRali/quickbite-app" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none">GitHub ↗</a>
+          </div>
+          <p class="item-desc">Full stack food delivery application with user auth, real-time order management and restaurant listings using MERN stack + Firebase.</p>
+          <div class="item-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Firebase</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">Real Estate Management Software</div>
+            <a href="https://github.com/VishnuRali/realestate-management-software-main" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none">GitHub ↗</a>
+          </div>
+          <p class="item-desc">Property management system handling listings, tenants and transactions with a Python backend.</p>
+          <div class="item-tags"><span class="tag">Python</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">TaskFlow — Backend API</div>
+            <a href="https://github.com/VishnuRali/taskflow-backend" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none">GitHub ↗</a>
+          </div>
+          <p class="item-desc">RESTful task management backend with full CRUD operations and clean API architecture.</p>
+          <div class="item-tags"><span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">Express</span></div>
+        </div>
+        </div>
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- SIDEBAR -->
+    <div class="side-col fade-in" style="transition-delay:.15s">
+
+      <!-- SKILLS -->
+      <div class="side-card">
+        <div class="side-title">Skills</div>
+        <div id="r-skills-groups">
+        <div class="skill-group">
+          <div class="skill-label">Frontend</div>
+          <div class="skill-pills">
+            <span class="skill-pill">HTML5</span><span class="skill-pill">CSS3</span>
+            <span class="skill-pill">JavaScript</span><span class="skill-pill">React.js</span>
+            <span class="skill-pill">Responsive Design</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Backend</div>
+          <div class="skill-pills">
+            <span class="skill-pill">Node.js</span><span class="skill-pill">Express.js</span>
+            <span class="skill-pill">REST APIs</span><span class="skill-pill">MongoDB</span>
+            <span class="skill-pill">Java</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Tools</div>
+          <div class="skill-pills">
+            <span class="skill-pill">Git</span><span class="skill-pill">GitHub</span>
+            <span class="skill-pill">VS Code</span><span class="skill-pill">Firebase</span>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS (compact list) -->
+      <div class="side-card">
+        <div class="side-title">Certifications</div>
+        <div id="r-certs-list">
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Software Engineering &amp; Coding</div><div class="cert-meta">IBM SkillsBuild · Feb 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Web Development Basics</div><div class="cert-meta">IBM SkillsBuild · Feb 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Artificial Intelligence in Practice</div><div class="cert-meta">IBM SkillsBuild · Feb 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">What is Cloud Computing?</div><div class="cert-meta">IBM SkillsBuild · Feb 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Managing Projects in Digital Environment</div><div class="cert-meta">IBM SkillsBuild · Feb 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Online Security</div><div class="cert-meta">IBM SkillsBuild · Feb 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Full Stack Developer Internship</div><div class="cert-meta">Full Stack Dev Program · 2025</div></div></div>
+        <div class="cert-row"><div class="cert-dot"></div><div><div class="cert-name">Future Intern — Full Stack Development</div><div class="cert-meta">Future Intern · 2025</div></div></div>
+        </div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="side-card">
+        <div class="side-title">Languages</div>
+        <div id="r-languages-list">
+        <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Hindi</span><span class="lang-level">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Telugu</span><span class="lang-level">Native</span></div>
+        </div>
+      </div>
+
+      <!-- STRENGTHS -->
+      <div class="side-card">
+        <div class="side-title">Strengths</div>
+        <div id="r-strengths-list">
+        <div class="strength-item">Good Interpersonal Skills</div>
+        <div class="strength-item">Multilingual Communicator</div>
+        <div class="strength-item">Quick Learner &amp; Adaptable</div>
+        <div class="strength-item">Eager to Learn New Tech</div>
+        </div>
+      </div>
+
+    </div><!-- /side-col -->
+  </div><!-- /resume-body -->
+</div><!-- /page -->
+
+<script>
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+
+<!-- ============================================================
+     RESUME CONTENT LOADER — wires all fields to content.json.
+     If fetch fails, static HTML above is the untouched fallback.
+     ============================================================ -->
+<script>
+(function(){
+  function esc(s){
+    return String(s==null?'':s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function setText(id,val){
+    const el=document.getElementById(id);
+    if(el&&val!=null) el.textContent=val;
+  }
+  function setHref(id,val){
+    const el=document.getElementById(id);
+    if(el&&val!=null) el.href=val;
+  }
+  function setInner(id,html){
+    const el=document.getElementById(id);
+    if(el) el.innerHTML=html;
+  }
+
+  fetch('/content.json',{cache:'no-store'})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(data=>{
+      if(!data) return;
+      const h=data.hero||{};
+      const rc=data.resumeContent||{};
+      const ct=data.contact||{};
+
+      // Header
+      if(h.name) setText('r-name',h.name);
+      if(h.title) setText('r-title',h.title+' · B.Tech CSE');
+      if(h.location) setText('r-location',h.location);
+
+      // Download PDF
+      if(data.resume&&data.resume.downloadUrl){
+        setHref('r-download-btn',data.resume.downloadUrl);
+      }
+
+      // Contact block (right side of header)
+      if(rc.phone||ct.email||ct.githubUrl||ct.linkedinUrl){
+        let html='';
+        if(rc.phone) html+='<a href="tel:'+esc(rc.phone)+'" class="contact-item"><span>📞</span> '+esc(rc.phone)+'</a>';
+        if(ct.email) html+='<a href="mailto:'+esc(ct.email)+'" class="contact-item"><span>✉</span> '+esc(ct.email)+'</a>';
+        if(ct.githubUrl) html+='<a href="'+esc(ct.githubUrl)+'" target="_blank" class="contact-item"><span>🐙</span> github.com/'+esc(ct.githubHandle||'')+'</a>';
+        if(ct.linkedinUrl) html+='<a href="'+esc(ct.linkedinUrl)+'" target="_blank" class="contact-item"><span>💼</span> linkedin.com/in/'+esc(ct.linkedinHandle||'')+'</a>';
+        if(html) setInner('r-contact-block',html);
+      }
+
+      // Objective
+      if(rc.objective) setText('r-objective',rc.objective);
+
+      // Experience
+      if(data.experience&&data.experience.length){
+        const html=data.experience.map(it=>{
+          const tags=(it.tags||[]).map(t=>'<span class="tag">'+esc(t)+'</span>').join('');
+          return '<div class="item">'
+            +'<div class="item-header"><div class="item-title">'+esc(it.role)+'</div>'
+            +'<div class="item-period">'+esc(it.period)+'</div></div>'
+            +'<div class="item-sub">'+esc(it.company)+'</div>'
+            +'<p class="item-desc">'+esc(it.description)+'</p>'
+            +'<div class="item-tags">'+tags+'</div></div>';
+        }).join('');
+        setInner('r-experience-list',html);
+      }
+
+      // Education
+      if(rc.education&&rc.education.length){
+        const html=rc.education.map(e=>'<div class="edu-item">'
+          +'<div class="edu-degree">'+esc(e.degree)+'</div>'
+          +'<div class="edu-school">'+esc(e.school)+'</div>'
+          +'<div class="edu-board">'+esc(e.board)+'</div>'
+          +'<div class="edu-score">'+esc(e.score)+'</div>'
+          +'</div>').join('');
+        setInner('r-education-list',html);
+      }
+
+      // Projects
+      if(data.projects&&data.projects.length){
+        const html=data.projects.map(p=>{
+          const tags=(p.tech||[]).map(t=>'<span class="tag">'+esc(t)+'</span>').join('');
+          return '<div class="item">'
+            +'<div class="item-header"><div class="item-title">'+esc(p.name)+'</div>'
+            +'<a href="'+esc(p.linkUrl)+'" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none">'+esc(p.linkLabel)+'</a></div>'
+            +'<p class="item-desc">'+esc(p.description)+'</p>'
+            +'<div class="item-tags">'+tags+'</div></div>';
+        }).join('');
+        setInner('r-projects-list',html);
+      }
+
+      // Skills (sidebar)
+      if(data.skills){
+        const html=Object.keys(data.skills).map(label=>{
+          const pills=(data.skills[label]||[]).map(s=>'<span class="skill-pill">'+esc(s)+'</span>').join('');
+          return '<div class="skill-group"><div class="skill-label">'+esc(label)+'</div>'
+            +'<div class="skill-pills">'+pills+'</div></div>';
+        }).join('');
+        setInner('r-skills-groups',html);
+      }
+
+      // Certifications (compact sidebar list)
+      if(data.certifications&&data.certifications.length){
+        const html=data.certifications.map(c=>'<div class="cert-row">'
+          +'<div class="cert-dot"></div>'
+          +'<div><div class="cert-name">'+esc(c.title)+'</div>'
+          +'<div class="cert-meta">'+esc(c.organization)+' · '+esc(c.year)+'</div></div>'
+          +'</div>').join('');
+        setInner('r-certs-list',html);
+      }
+
+      // Languages
+      if(rc.languages&&rc.languages.length){
+        const html=rc.languages.map(l=>'<div class="lang-row">'
+          +'<span class="lang-name">'+esc(l.name)+'</span>'
+          +'<span class="lang-level">'+esc(l.level)+'</span>'
+          +'</div>').join('');
+        setInner('r-languages-list',html);
+      }
+
+      // Strengths
+      if(rc.strengths&&rc.strengths.length){
+        const html=rc.strengths.map(s=>'<div class="strength-item">'+esc(s)+'</div>').join('');
+        setInner('r-strengths-list',html);
+      }
+    })
+    .catch(function(){/* silent: static fallback shown */});
+})();
+</script>
+</body>
+</html>

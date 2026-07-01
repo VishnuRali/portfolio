@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Login — Vishnu Vardhan Rali</title>
+<meta name="robots" content="noindex, nofollow"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:#0d0d0d;
+  color:#f0ede8;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+}
+.login-card{
+  width:100%;
+  max-width:360px;
+  background:#161616;
+  border:1px solid #2a2a2a;
+  border-radius:12px;
+  padding:2rem;
+}
+.login-title{font-size:1.1rem;font-weight:600;margin-bottom:.35rem}
+.login-sub{font-size:.85rem;color:#8a8a8a;margin-bottom:1.5rem}
+label{display:block;font-size:.8rem;color:#aaa;margin-bottom:.4rem}
+input[type="password"]{
+  width:100%;
+  background:#0d0d0d;
+  border:1px solid #2a2a2a;
+  border-radius:8px;
+  padding:.7rem .85rem;
+  color:#f0ede8;
+  font-size:.95rem;
+  margin-bottom:1rem;
+  outline:none;
+}
+input[type="password"]:focus{border-color:#4f8ef7}
+button{
+  width:100%;
+  background:#4f8ef7;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:.7rem;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+}
+button:hover{background:#3b7de8}
+button:disabled{opacity:.6;cursor:default}
+.error-msg{
+  color:#f87171;
+  font-size:.82rem;
+  margin-bottom:1rem;
+  min-height:1.1em;
+}
+.back-link{
+  display:inline-block;
+  margin-top:1.25rem;
+  font-size:.8rem;
+  color:#6b7280;
+  text-decoration:none;
+}
+.back-link:hover{color:#aaa}
+</style>
+</head>
+<body>
+
+<div class="login-card">
+  <div class="login-title">Admin Login</div>
+  <div class="login-sub">Sign in to edit site content.</div>
+  <form id="loginForm">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" autocomplete="current-password" required/>
+    <div class="error-msg" id="errorMsg"></div>
+    <button type="submit" id="submitBtn">Log In</button>
+  </form>
+  <a href="/" class="back-link">← Back to site</a>
+</div>
+
+<script>
+const form = document.getElementById('loginForm');
+const errorMsg = document.getElementById('errorMsg');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorMsg.textContent = '';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Logging in…';
+
+  const password = document.getElementById('password').value;
+
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    });
+    const data = await res.json();
+    if (res.ok && data.ok) {
+      window.location.href = '/admin/index.html';
+    } else {
+      errorMsg.textContent = data.error || 'Login failed.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Log In';
+    }
+  } catch (err) {
+    errorMsg.textContent = 'Network error. Please try again.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Log In';
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vishnu Vardhan Rali — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;
+  --bg2:#161616;
+  --bg3:#1e1e1e;
+  --line:#2a2a2a;
+  --text:#f0ede8;
+  --muted:#6b7280;
+  --accent:#4f8ef7;
+  --accent-light:#1a2540;
+  --serif:'Playfair Display',serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bottom:1px solid var(--line);padding:0 2.5rem;display:flex;justify-content:space-between;align-items:center;height:60px}
+.nav-logo{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:.02em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-resume{font-size:13px;font-weight:500;color:#fff;background:var(--accent);text-decoration:none;padding:.45rem 1.1rem;border-radius:6px;transition:background .2s}
+.nav-resume:hover{background:#1e40af}
+
+/* HERO */
+.hero{max-width:1200px;margin:0 auto;padding:100px 2.5rem 80px;display:flex;align-items:flex-start;gap:3rem;border-bottom:1px solid var(--line)}
+.hero-avatar{width:96px;height:96px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:#fff;flex-shrink:0;font-weight:600}
+.hero-content{}
+.hero-name{font-family:var(--serif);font-size:2.6rem;font-weight:600;line-height:1.1;margin-bottom:.4rem;letter-spacing:-.02em;color:var(--text)}
+.hero-title{font-size:15px;font-weight:500;color:var(--accent);margin-bottom:.75rem}
+.hero-location{font-size:13px;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
+.hero-bio{font-size:14px;color:var(--muted);line-height:1.75;max-width:560px;margin-bottom:1.5rem}
+.hero-badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.75rem}
+.badge{font-size:12px;font-weight:500;padding:.3rem .75rem;border-radius:999px;background:#1a2540;color:#4f8ef7}
+.badge.green{background:#0f2a1a;color:#4ade80}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;font-size:13px;font-weight:500;text-decoration:none;padding:.6rem 1.5rem;border-radius:6px;transition:background .2s}
+.btn-primary:hover{background:#1e40af}
+.btn-secondary{background:#1e1e1e;color:#f0ede8;font-size:13px;font-weight:500;text-decoration:none;padding:.6rem 1.5rem;border-radius:6px;border:1px solid #2a2a2a;transition:all .2s}
+.btn-secondary:hover{border-color:#4f8ef7;color:#4f8ef7}
+
+/* MAIN LAYOUT — two-col sidebar */
+.layout{max-width:1200px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:1fr 280px;gap:3rem;padding-top:3rem;padding-bottom:0}
+.main-col{}
+.side-col{}
+
+/* SECTION */
+.sec{margin-bottom:3rem}
+.sec-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+
+/* EXPERIENCE */
+.exp-item{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.exp-item:last-child{border-bottom:none}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem}
+.exp-role{font-size:15px;font-weight:600;color:var(--text)}
+.exp-period{font-size:12px;color:var(--muted);white-space:nowrap}
+.exp-company{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:.5rem}
+.exp-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:.75rem}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.exp-tag{font-size:11px;background:#1e1e1e;color:#f0ede8;border:1px solid #2a2a2a;padding:.2rem .6rem;border-radius:4px}
+
+/* PROJECTS */
+.project-item{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.project-item:last-child{border-bottom:none}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem;gap:1rem}
+.project-name{font-size:15px;font-weight:600;color:var(--text)}
+.project-link{font-size:12px;color:var(--accent);text-decoration:none;white-space:nowrap;font-weight:500}
+.project-link:hover{text-decoration:underline}
+.project-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:.75rem}
+.project-tech{display:flex;flex-wrap:wrap;gap:.4rem}
+.tech-tag{font-size:11px;background:#1e1e1e;color:#9ca3af;border:1px solid #2a2a2a;padding:.2rem .55rem;border-radius:4px}
+
+/* SIDEBAR */
+.side-card{background:#161616;border:1px solid #2a2a2a;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.side-card-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.skill-group{margin-bottom:1rem}
+.skill-group:last-child{margin-bottom:0}
+.skill-group-label{font-size:11px;font-weight:600;color:#f0ede8;margin-bottom:.5rem}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.35rem}
+.skill-pill{font-size:11px;background:#242424;border:1px solid #333;color:#9ca3af;padding:.25rem .6rem;border-radius:4px}
+
+/* CONTACT CARD */
+.contact-row{display:flex;align-items:center;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--line);text-decoration:none}
+.contact-row:last-child{border-bottom:none}
+.contact-icon{width:28px;height:28px;border-radius:6px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--accent);flex-shrink:0}
+.contact-info{}
+.contact-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.contact-val{font-size:13px;color:var(--text);font-weight:400}
+.contact-row:hover .contact-val{color:var(--accent)}
+
+/* AVAIL BADGE */
+.avail-banner{background:#0f2a1a;border:1px solid #166534;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.avail-dot{width:8px;height:8px;background:#16a34a;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.avail-text{font-size:13px;color:#4ade80;font-weight:500}
+
+/* ============================================================
+   CERTIFICATIONS & INTERNSHIPS — full-width section
+   ============================================================ */
+.certs-section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 2.5rem 4rem;
+  border-top:1px solid var(--line);
+  padding-top:3rem;
+}
+.certs-section-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom:2rem;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.certs-section-title{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.certs-count{
+  font-size:11px;
+  color:var(--muted);
+  background:var(--bg3);
+  border:1px solid var(--line);
+  padding:.2rem .6rem;
+  border-radius:4px;
+}
+/* CERTIFICATIONS — numbered list */
+.cert-list{
+  display:flex;
+  flex-direction:column;
+}
+.cert-list-row{
+  display:grid;
+  grid-template-columns:2.5rem 1fr auto;
+  align-items:baseline;
+  gap:.5rem 1rem;
+  padding:.85rem 0;
+  border-bottom:1px solid var(--line);
+  transition:background .15s;
+}
+.cert-list-row:first-child{border-top:1px solid var(--line)}
+.cert-list-row:hover{background:rgba(255,255,255,.015)}
+.cert-list-num{
+  font-size:11px;
+  font-weight:600;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.04em;
+  padding-top:.05em;
+}
+.cert-list-body{display:flex;flex-direction:column;gap:.2rem}
+.cert-list-title{
+  font-size:13px;
+  font-weight:600;
+  color:var(--text);
+  line-height:1.35;
+}
+.cert-list-meta{
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  flex-wrap:wrap;
+  font-size:11px;
+  color:var(--muted);
+}
+.cert-list-meta .sep{color:var(--line)}
+.cert-list-meta .org{color:var(--accent)}
+.cert-list-verified{
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  font-size:10px;
+  font-weight:600;
+  color:#4ade80;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  align-self:center;
+}
+.cert-list-verified-dot{
+  width:5px;height:5px;border-radius:50%;background:#16a34a;flex-shrink:0;
+}
+
+
+/* ============================================================
+   FEATURED CERTIFICATES — compact, max 2-per-row, green accent
+   ============================================================ */
+.featured-exp-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.25rem;
+  align-items:stretch;
+}
+.exp-feature-card{
+  background:var(--bg2);
+  border:1px solid #1c3a26;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:border-color .2s, transform .2s;
+}
+.exp-feature-card:hover{
+  border-color:#2e6b44;
+  transform:translateY(-2px);
+}
+
+/* Thumbnail — used only by Featured Certificates */
+.exp-feature-card .fc-thumb{
+  width:100%;
+  height:90px;
+  background:var(--bg3);
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+.exp-feature-card .fc-thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.fc-thumb-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+  background:linear-gradient(135deg,#0d1f11 0%,#142a1a 100%);
+}
+.fc-thumb-icon{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#1a3a1a,#16a34a);
+}
+.fc-thumb-org{font-size:9px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+/* Card body */
+.exp-feature-card .fc-body{
+  padding:.9rem 1rem;
+  display:flex;flex-direction:column;gap:.4rem;flex:1;
+}
+.exp-feature-card .fc-meta-row{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+}
+.exp-feature-card .fc-org{
+  font-size:11px;color:#4ade80;font-weight:500;letter-spacing:.01em;
+}
+.exp-feature-card .fc-year{font-size:11px;color:var(--muted);white-space:nowrap}
+.exp-feature-card .fc-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.35}
+.exp-feature-card .fc-desc{
+  font-size:12px;color:var(--muted);line-height:1.5;flex:1;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.exp-feature-card .fc-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.25rem;
+}
+.fc-verified{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:10px;font-weight:600;color:#4ade80;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.fc-verified-dot{width:5px;height:5px;border-radius:50%;background:#16a34a;flex-shrink:0}
+.fc-btn{
+  font-size:11px;font-weight:500;
+  color:#4ade80;background:#0f2a1a;text-decoration:none;
+  padding:.3rem .7rem;border-radius:5px;border:none;cursor:pointer;
+  transition:background .15s,color .15s;white-space:nowrap;
+}
+.fc-btn:hover{background:#14532d;color:#fff}
+
+.exp-feature-badge{
+  display:inline-block;font-size:10px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:#4ade80;background:#0f2a1a;border:1px solid #1c3a26;
+  padding:.2rem .55rem;border-radius:999px;margin-bottom:.25rem;width:fit-content;
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:1.5rem 2.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.footer-text{font-size:12px;color:var(--muted)}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(min-width:721px) and (max-width:1023px){
+  .layout{grid-template-columns:1fr 240px}
+  .featured-exp-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .hero{flex-direction:column;gap:1.5rem;padding:80px 1.25rem 3rem}
+  .layout{grid-template-columns:1fr;padding:0 1.25rem 0}
+  .certs-section{padding:2rem 1.25rem 3rem}
+  .featured-exp-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.5rem;padding:1.5rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Vishnu Vardhan Rali</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#featured-certificates">Featured Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="resume.html" class="nav-resume">Resume ↗</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-in">
+  <div class="hero-avatar">
+    <img src="./pfp for wedsite.png"
+     alt="Vishnu Vardhan Rali"
+     style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #fff;">
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-name" id="f-hero-name">Vishnu Vardhan Rali</h1>
+    <div class="hero-title" id="f-hero-title">Full Stack Developer</div>
+    <div class="hero-location" id="f-hero-location">📍 Khammam, India · B.Tech Final Year</div>
+    <p class="hero-bio" id="f-hero-bio">Passionate Full Stack Developer with real-world internship experience, 7+ IBM certifications, and a drive to build products that matter. Seeking full-time developer roles in 2025.</p>
+    <div class="hero-badges" id="f-hero-badges">
+      <span class="badge green" id="f-availability-badge">● Available for Hire</span>
+      <span class="badge">HTML</span>
+      <span class="badge">CSS</span>
+      <span class="badge">JavaScript</span>
+      <span class="badge">SQL</span>
+      <span class="badge">MongoDB</span>
+      <span class="badge">Git</span>
+      <span class="badge">GitHub</span>
+      <span class="badge">Java</span>
+      <span class="badge">Python</span>
+      <span class="badge">Responsive Design</span>
+    </div>
+    <div class="hero-cta" id="f-hero-cta">
+      <a href="mailto:ralivishnu565@gmail.com" class="btn-primary" id="f-cta-email">Contact Me</a>
+      <a href="https://github.com/VishnuRali" target="_blank" class="btn-secondary" id="f-cta-github">GitHub →</a>
+      <a href="https://www.linkedin.com/in/vishnuvardhanrali" target="_blank" class="btn-secondary" id="f-cta-linkedin">LinkedIn →</a>
+    </div>
+  </div>
+</div>
+
+<!-- TWO-COLUMN LAYOUT: main (exp + projects) + sidebar -->
+<div class="layout">
+
+  <!-- MAIN COLUMN -->
+  <div class="main-col">
+
+    <!-- EXPERIENCE -->
+    <div class="sec fade-in" id="experience">
+      <div class="sec-title">Experience</div>
+      <div id="f-experience-list">
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Full Stack Developer Intern</div>
+          <div class="exp-period">2025</div>
+        </div>
+        <div class="exp-company">Full Stack Development Program · Hyderabad, India</div>
+        <p class="exp-desc">Built and deployed full stack web applications using modern technologies. Designed responsive UIs, developed backend REST APIs, and connected databases. Worked in a team environment following industry-standard development practices.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">HTML</span><span class="exp-tag">CSS</span><span class="exp-tag">SQL</span>
+          <span class="exp-tag">GitHub</span><span class="exp-tag">Java</span><span class="exp-tag">Python</span>
+          <span class="exp-tag">React.js</span><span class="exp-tag">Node.js</span><span class="exp-tag">MongoDB</span>
+          <span class="exp-tag">JavaScript</span><span class="exp-tag">Git</span>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="sec fade-in" id="projects">
+      <div class="sec-title">Projects</div>
+      <div id="f-projects-list">
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">QuickBite — Food Delivery App</div>
+          <a href="https://github.com/VishnuRali/quickbite-app" target="_blank" class="project-link">GitHub ↗</a>
+        </div>
+        <p class="project-desc">Full stack food delivery application with user authentication, real-time order management, and restaurant listings. Built using the MERN stack with Firebase integration.</p>
+        <div class="project-tech">
+          <span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Firebase</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">Real Estate Management Software</div>
+          <a href="https://github.com/VishnuRali/realestate-management-software-main" target="_blank" class="project-link">GitHub ↗</a>
+        </div>
+        <p class="project-desc">Property management system to handle listings, tenant records, and transactions with a Python backend.</p>
+        <div class="project-tech"><span class="tech-tag">Python</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">TaskFlow — Backend API</div>
+          <a href="https://github.com/VishnuRali/taskflow-backend" target="_blank" class="project-link">GitHub ↗</a>
+        </div>
+        <p class="project-desc">RESTful task management backend with full CRUD operations and clean, documented API architecture.</p>
+        <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">Future Intern FS — Project 01</div>
+          <a href="https://futuree-fs-01.netlify.app/" target="_blank" class="project-link">Live Demo ↗</a>
+        </div>
+        <p class="project-desc">Frontend project built and deployed as part of the Future Intern Full Stack development program.</p>
+        <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-name">Future Intern FS — Project 02</div>
+          <a href="https://futuree-fs-02.netlify.app/" target="_blank" class="project-link">Live Demo ↗</a>
+        </div>
+        <p class="project-desc">Second full stack project from the Future Intern program featuring a JavaScript-heavy modern frontend.</p>
+        <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">CSS</span></div>
+      </div>
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- SIDE COLUMN -->
+  <div class="side-col fade-in" style="transition-delay:.15s">
+
+    <div class="avail-banner">
+      <div class="avail-dot"></div>
+      <div class="avail-text" id="f-avail-banner-text">Open to full-time roles in 2025</div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="side-card" id="contact">
+      <div class="side-card-title">Contact</div>
+      <a href="mailto:ralivishnu565@gmail.com" class="contact-row" id="f-contact-email-row">
+        <div class="contact-icon">✉</div>
+        <div class="contact-info"><div class="contact-label">Email</div><div class="contact-val" id="f-contact-email-val">ralivishnu565@gmail.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/vishnuvardhanrali" target="_blank" class="contact-row" id="f-contact-linkedin-row">
+        <div class="contact-icon">in</div>
+        <div class="contact-info"><div class="contact-label">LinkedIn</div><div class="contact-val" id="f-contact-linkedin-val">vishnuvardhanrali</div></div>
+      </a>
+      <a href="https://github.com/VishnuRali" target="_blank" class="contact-row" id="f-contact-github-row">
+        <div class="contact-icon">gh</div>
+        <div class="contact-info"><div class="contact-label">GitHub</div><div class="contact-val" id="f-contact-github-val">VishnuRali</div></div>
+      </a>
+      <a href="https://vishnuvardhanrali.com/resume.html" target="_blank" class="contact-row" id="f-contact-resume-row">
+        <div class="contact-icon">↗</div>
+        <div class="contact-info"><div class="contact-label">Resume</div><div class="contact-val">View Resume</div></div>
+      </a>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="side-card">
+      <div class="side-card-title">Skills</div>
+      <div id="f-skills-groups">
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-pills">
+          <span class="skill-pill">HTML</span><span class="skill-pill">CSS</span>
+          <span class="skill-pill">JavaScript</span><span class="skill-pill">Java</span>
+          <span class="skill-pill">SQL</span><span class="skill-pill">Python (basic)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Database</div>
+        <div class="skill-pills">
+          <span class="skill-pill">MongoDB</span><span class="skill-pill">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span><span class="skill-pill">GitHub</span><span class="skill-pill">VS Code</span>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="side-card">
+      <div class="side-card-title">Education</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem" id="f-edu-degree">B.Tech — Final Year</div>
+      <div style="font-size:13px;color:var(--accent);margin-bottom:.25rem;font-weight:500" id="f-edu-field">Computer Science / IT</div>
+      <div style="font-size:12px;color:var(--muted)" id="f-edu-meta">Khammam, India · 2025</div>
+    </div>
+
+  </div><!-- /side-col -->
+
+</div><!-- /layout -->
+
+<!-- ============================================================
+     PROFESSIONAL CERTIFICATIONS — full-width, IBM SkillsBuild only
+     Things studied / badges earned live here.
+     ============================================================ -->
+<section class="certs-section fade-in" id="certifications">
+  <div class="certs-section-header">
+    <span class="certs-section-title">Professional Certifications</span>
+    <span class="certs-count" id="f-certs-count">7 credentials</span>
+  </div>
+  <div class="cert-list" id="f-certifications-grid">
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">01</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">Software Engineering &amp; Coding</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>Feb 13, 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">02</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">Web Development Basics</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>Feb 15, 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">03</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">Artificial Intelligence in Practice</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>Mar 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">04</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">What Is Artificial Intelligence?</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>Mar 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">05</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">What Is Cloud Computing?</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>Apr 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">06</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">Managing Projects in a Digital Environment</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>Apr 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+    <div class="cert-list-row">
+      <span class="cert-list-num">07</span>
+      <div class="cert-list-body">
+        <span class="cert-list-title">Online Security</span>
+        <span class="cert-list-meta"><span class="org">IBM SkillsBuild</span><span class="sep">•</span>May 2025</span>
+      </div>
+      <span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>
+    </div>
+
+  </div><!-- /cert-list -->
+</section>
+
+<!-- ============================================================
+     FEATURED CERTIFICATES — compact, important internship/program
+     certificates only. Max 2 per row desktop, 1 per row mobile.
+     ============================================================ -->
+<section class="certs-section fade-in" id="featured-certificates">
+  <div class="certs-section-header">
+    <span class="certs-section-title">Featured Certificates</span>
+  </div>
+  <div class="featured-exp-grid" id="f-featured-experience-grid">
+
+    <!-- Internship certificate -->
+    <div class="exp-feature-card">
+      <div class="fc-thumb">
+        <div class="fc-thumb-placeholder">
+          <div class="fc-thumb-icon">FI</div>
+          <span class="fc-thumb-org">Future Intern</span>
+        </div>
+      </div>
+      <div class="fc-body">
+        <span class="exp-feature-badge">Internship</span>
+        <div class="fc-meta-row">
+          <span class="fc-org">Future Intern · Hyderabad</span>
+          <span class="fc-year">Jun 2025</span>
+        </div>
+        <div class="fc-title">Full Stack Developer Internship</div>
+        <div class="fc-desc">Built and shipped full stack web apps end-to-end with direct mentorship on production-grade practices.</div>
+        <div class="fc-footer">
+          <span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>
+          <a href="#" class="fc-btn" target="_blank" rel="noopener">View Credential</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Program certificate -->
+    <div class="exp-feature-card">
+      <div class="fc-thumb">
+        <div class="fc-thumb-placeholder">
+          <div class="fc-thumb-icon">FI</div>
+          <span class="fc-thumb-org">Future Intern</span>
+        </div>
+      </div>
+      <div class="fc-body">
+        <span class="exp-feature-badge">Program</span>
+        <div class="fc-meta-row">
+          <span class="fc-org">Future Intern</span>
+          <span class="fc-year">Mar 2025</span>
+        </div>
+        <div class="fc-title">Future Intern Program</div>
+        <div class="fc-desc">Completed the Future Intern Full Stack track, delivering two production-ready frontend projects.</div>
+        <div class="fc-footer">
+          <span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>
+          <a href="#" class="fc-btn" target="_blank" rel="noopener">View Credential</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /featured-exp-grid -->
+</section>
+
+
+<footer>
+  <span class="footer-text" id="f-footer-left">Vishnu Vardhan Rali · Full Stack Developer · Khammam, India 🇮🇳</span>
+  <span class="footer-text" id="f-footer-right">© 2025</span>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+
+<!-- ============================================================
+     CONTENT LOADER — fetches content.json, fills dynamic IDs.
+     Static HTML above is the fallback; fetch failure is silent.
+     ============================================================ -->
+<script>
+(function(){
+  function esc(s){
+    return String(s==null?'':s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function setText(id, val){
+    const el=document.getElementById(id);
+    if(el&&val!=null) el.textContent=val;
+  }
+  function setHref(id, val){
+    const el=document.getElementById(id);
+    if(el&&val!=null) el.href=val;
+  }
+
+  function renderBadges(container, availabilityText, badges){
+    if(!container||!badges) return;
+    let html='<span class="badge green">'+esc(availabilityText)+'</span>';
+    badges.forEach(b=>{ html+='<span class="badge">'+esc(b)+'</span>'; });
+    container.innerHTML=html;
+  }
+
+  function renderExperience(container, items){
+    if(!container||!items) return;
+    container.innerHTML=items.map(it=>{
+      const tags=(it.tags||[]).map(t=>'<span class="exp-tag">'+esc(t)+'</span>').join('');
+      return '<div class="exp-item">'
+        +'<div class="exp-header"><div class="exp-role">'+esc(it.role)+'</div><div class="exp-period">'+esc(it.period)+'</div></div>'
+        +'<div class="exp-company">'+esc(it.company)+'</div>'
+        +'<p class="exp-desc">'+esc(it.description)+'</p>'
+        +'<div class="exp-tags">'+tags+'</div>'
+        +'</div>';
+    }).join('');
+  }
+
+  function renderProjects(container, items){
+    if(!container||!items) return;
+    container.innerHTML=items.map(p=>{
+      const tech=(p.tech||[]).map(t=>'<span class="tech-tag">'+esc(t)+'</span>').join('');
+      return '<div class="project-item">'
+        +'<div class="project-header"><div class="project-name">'+esc(p.name)+'</div>'
+        +'<a href="'+esc(p.linkUrl)+'" target="_blank" class="project-link">'+esc(p.linkLabel)+'</a></div>'
+        +'<p class="project-desc">'+esc(p.description)+'</p>'
+        +'<div class="project-tech">'+tech+'</div>'
+        +'</div>';
+    }).join('');
+  }
+
+
+  function renderCerts(container, items){
+    if(!container||!items) return;
+
+    const countEl=document.getElementById('f-certs-count');
+    if(countEl) countEl.textContent=items.length+' credential'+(items.length===1?'':'s');
+
+    container.innerHTML=items.map((c,i)=>{
+      const num=String(i+1).padStart(2,'0');
+      const dateLabel=c.date||c.month||c.year||'';
+      const verified=c.verified!==false
+        ? '<span class="cert-list-verified"><span class="cert-list-verified-dot"></span>Verified</span>'
+        : '';
+      return '<div class="cert-list-row">'
+        +'<span class="cert-list-num">'+num+'</span>'
+        +'<div class="cert-list-body">'
+        +'<span class="cert-list-title">'+esc(c.title)+'</span>'
+        +'<span class="cert-list-meta"><span class="org">'+esc(c.organization)+'</span>'
+        +(dateLabel?'<span class="sep">•</span>'+esc(dateLabel):'')
+        +'</span></div>'
+        +verified
+        +'</div>';
+    }).join('');
+  }
+
+  function renderFeaturedCard(item){
+    const hasImage=item.image&&item.image.trim();
+    const initials=(item.initials||item.organization||'?').slice(0,2).toUpperCase();
+    const thumbHtml=hasImage
+      ? '<img src="'+esc(item.image)+'" alt="'+esc(item.title)+'" loading="lazy"/>'
+      : '<div class="fc-thumb-placeholder"><div class="fc-thumb-icon">'+esc(initials)+'</div>'
+        +'<span class="fc-thumb-org">'+esc(item.organization)+'</span></div>';
+    const hasVerify=item.verificationUrl&&item.verificationUrl.trim();
+    const btnHref=hasVerify ? esc(item.verificationUrl) : (hasImage ? esc(item.image) : '#');
+    const btnTarget=hasVerify||hasImage?' target="_blank" rel="noopener"':'';
+    return '<div class="exp-feature-card">'
+      +'<div class="fc-thumb">'+thumbHtml+'</div>'
+      +'<div class="fc-body">'
+      +(item.badge?'<span class="exp-feature-badge">'+esc(item.badge)+'</span>':'')
+      +'<div class="fc-meta-row"><span class="fc-org">'+esc(item.organization)+'</span><span class="fc-year">'+esc(item.date)+'</span></div>'
+      +'<div class="fc-title">'+esc(item.title)+'</div>'
+      +'<div class="fc-desc">'+esc(item.description)+'</div>'
+      +'<div class="fc-footer"><span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>'
+      +'<a href="'+btnHref+'" class="fc-btn"'+btnTarget+'>View Credential</a>'
+      +'</div></div></div>';
+  }
+
+  function renderFeaturedExperience(container, fx){
+    if(!container||!fx) return;
+    // Accepts either { items:[...] } or the legacy { hero:{...}, supporting:{...} } shape.
+    const items=Array.isArray(fx.items) ? fx.items : [fx.hero, fx.supporting].filter(Boolean);
+    if(items.length) container.innerHTML=items.map(renderFeaturedCard).join('');
+  }
+
+  function renderSkills(container, groups){
+    if(!container||!groups) return;
+    container.innerHTML=Object.keys(groups).map(label=>{
+      const pills=(groups[label]||[]).map(s=>'<span class="skill-pill">'+esc(s)+'</span>').join('');
+      return '<div class="skill-group"><div class="skill-group-label">'+esc(label)+'</div>'
+        +'<div class="skill-pills">'+pills+'</div></div>';
+    }).join('');
+  }
+
+  fetch('/content.json',{cache:'no-store'})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(data=>{
+      if(!data) return;
+
+      if(data.hero){
+        setText('f-hero-name',data.hero.name);
+        setText('f-hero-title',data.hero.title);
+        setText('f-hero-location',data.hero.location);
+        setText('f-hero-bio',data.hero.bio);
+        renderBadges(document.getElementById('f-hero-badges'),data.hero.availabilityBadge,data.hero.badges);
+      }
+
+      if(data.ctas){
+        setHref('f-cta-email',data.ctas.email?('mailto:'+data.ctas.email):null);
+        setHref('f-cta-github',data.ctas.github);
+        setHref('f-cta-linkedin',data.ctas.linkedin);
+      }
+
+      setText('f-avail-banner-text',data.availabilityBanner);
+
+      renderExperience(document.getElementById('f-experience-list'),data.experience);
+      renderProjects(document.getElementById('f-projects-list'),data.projects);
+      renderFeaturedExperience(document.getElementById('f-featured-experience-grid'),data.featuredExperience);
+      renderCerts(document.getElementById('f-certifications-grid'),data.certifications);
+
+      if(data.contact){
+        setHref('f-contact-email-row',data.contact.email?('mailto:'+data.contact.email):null);
+        setText('f-contact-email-val',data.contact.email);
+        setHref('f-contact-linkedin-row',data.contact.linkedinUrl);
+        setText('f-contact-linkedin-val',data.contact.linkedinHandle);
+        setHref('f-contact-github-row',data.contact.githubUrl);
+        setText('f-contact-github-val',data.contact.githubHandle);
+      }
+
+      renderSkills(document.getElementById('f-skills-groups'),data.skills);
+
+      if(data.education){
+        setText('f-edu-degree',data.education.degree);
+        setText('f-edu-field',data.education.field);
+        setText('f-edu-meta',data.education.meta);
+      }
+
+      if(data.footer){
+        setText('f-footer-left',data.footer.left);
+        setText('f-footer-right',data.footer.right);
+      }
+    })
+    .catch(function(){/* silent: static fallback already shown */});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "vishnuvardhanrali-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio site with a free GitHub-backed admin panel, deployed on Vercel.",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
