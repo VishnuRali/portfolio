@@ -5,7 +5,18 @@
     "location": "📍 Khammam, India · B.Tech Final Year",
     "bio": "Passionate Full Stack Developer with real-world internship experience, 7+ IBM certifications, and a drive to build products that matter. Seeking full-time developer roles in 2025.",
     "availabilityBadge": "● Available for Hire",
-    "badges": ["HTML", "CSS", "JavaScript", "SQL", "MongoDB", "Git", "GitHub", "Java", "Python", "Responsive Design"]
+    "badges": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "SQL",
+      "MongoDB",
+      "Git",
+      "GitHub",
+      "Java",
+      "Python",
+      "Responsive Design"
+    ]
   },
   "ctas": {
     "email": "ralivishnu565@gmail.com",
@@ -19,7 +30,19 @@
       "period": "2025",
       "company": "Full Stack Development Program · Hyderabad, India",
       "description": "Built and deployed full stack web applications using modern technologies. Designed responsive UIs, developed backend REST APIs, and connected databases. Worked in a team environment following industry-standard development practices.",
-      "tags": ["HTML", "CSS", "SQL", "GitHub", "Java", "Python", "React.js", "Node.js", "MongoDB", "JavaScript", "Git"]
+      "tags": [
+        "HTML",
+        "CSS",
+        "SQL",
+        "GitHub",
+        "Java",
+        "Python",
+        "React.js",
+        "Node.js",
+        "MongoDB",
+        "JavaScript",
+        "Git"
+      ]
     }
   ],
   "projects": [
@@ -28,35 +51,54 @@
       "linkLabel": "GitHub ↗",
       "linkUrl": "https://github.com/VishnuRali/quickbite-app",
       "description": "Full stack food delivery application with user authentication, real-time order management, and restaurant listings. Built using the MERN stack with Firebase integration.",
-      "tech": ["React", "Node.js", "Express", "MongoDB", "Firebase"]
+      "tech": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Firebase"
+      ]
     },
     {
       "name": "Real Estate Management Software",
       "linkLabel": "GitHub ↗",
       "linkUrl": "https://github.com/VishnuRali/realestate-management-software-main",
       "description": "Property management system to handle listings, tenant records, and transactions with a Python backend.",
-      "tech": ["Python"]
+      "tech": [
+        "Python"
+      ]
     },
     {
       "name": "TaskFlow — Backend API",
       "linkLabel": "GitHub ↗",
       "linkUrl": "https://github.com/VishnuRali/taskflow-backend",
       "description": "RESTful task management backend with full CRUD operations and clean, documented API architecture.",
-      "tech": ["JavaScript", "Node.js", "Express"]
+      "tech": [
+        "JavaScript",
+        "Node.js",
+        "Express"
+      ]
     },
     {
       "name": "Future Intern FS — Project 01",
       "linkLabel": "Live Demo ↗",
       "linkUrl": "https://futuree-fs-01.netlify.app/",
       "description": "Frontend project built and deployed as part of the Future Intern Full Stack development program.",
-      "tech": ["HTML", "CSS", "JavaScript"]
+      "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
     },
     {
       "name": "Future Intern FS — Project 02",
       "linkLabel": "Live Demo ↗",
       "linkUrl": "https://futuree-fs-02.netlify.app/",
       "description": "Second full stack project from the Future Intern program featuring a JavaScript-heavy modern frontend.",
-      "tech": ["JavaScript", "CSS"]
+      "tech": [
+        "JavaScript",
+        "CSS"
+      ]
     }
   ],
   "featuredExperience": {
@@ -91,7 +133,7 @@
       "description": "Foundations of software engineering principles, coding practices, and problem-solving methodologies.",
       "date": "Feb 2025",
       "image": "",
-      "verificationUrl": "",
+      "verificationUrl": "https://www.vishnuvardhanrali.com/",
       "verified": true
     },
     {
@@ -164,9 +206,23 @@
     "resumeUrl": "https://vishnuvardhanrali.com/resume.html"
   },
   "skills": {
-    "Languages": ["HTML", "CSS", "JavaScript", "Java", "SQL", "Python (basic)"],
-    "Database": ["MongoDB", "SQL"],
-    "Tools": ["Git", "GitHub", "VS Code"]
+    "Languages": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Java",
+      "SQL",
+      "Python (basic)"
+    ],
+    "Database": [
+      "MongoDB",
+      "SQL"
+    ],
+    "Tools": [
+      "Git",
+      "GitHub",
+      "VS Code"
+    ]
   },
   "education": {
     "degree": "B.Tech — Final Year",
@@ -205,9 +261,18 @@
       }
     ],
     "languages": [
-      { "name": "English", "level": "Fluent" },
-      { "name": "Hindi", "level": "Fluent" },
-      { "name": "Telugu", "level": "Native" }
+      {
+        "name": "English",
+        "level": "Fluent"
+      },
+      {
+        "name": "Hindi",
+        "level": "Fluent"
+      },
+      {
+        "name": "Telugu",
+        "level": "Native"
+      }
     ],
     "strengths": [
       "Good Interpersonal Skills",
