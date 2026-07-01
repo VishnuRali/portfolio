@@ -197,13 +197,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bo
 
 
 /* ============================================================
-   FEATURED CERTIFICATES — compact, max 2-per-row, green accent
+   FEATURED CERTIFICATES
+   auto-fill 3-col desktop, 2-col tablet, 1-col mobile
+   Compact cards ~320-340px, 16:9 thumbnail hero.
    ============================================================ */
 .featured-exp-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.25rem;
-  align-items:stretch;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:24px;
+  /* cap the grid so 3 cols never exceed ~340px each */
+  max-width:1080px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .exp-feature-card{
   background:var(--bg2);
@@ -219,37 +224,69 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bo
   transform:translateY(-2px);
 }
 
-/* Thumbnail — used only by Featured Certificates */
+/* ── Thumbnail ── */
 .exp-feature-card .fc-thumb{
   width:100%;
-  height:90px;
-  background:var(--bg3);
+  aspect-ratio:16/9;
+  background:#0a1a0f;
   flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   overflow:hidden;
   position:relative;
+  transition: background 0.2s;
+}
+.exp-feature-card .fc-thumb.has-image{
+  background:transparent !important;
+}
+.exp-feature-card .fc-thumb.portrait{
+  width:auto !important;
+  max-width: 100% !important;
+  height:160px !important;
+  aspect-ratio:4 / 5 !important;
+  margin:0 auto !important;
+  padding:6px !important;
+  background:transparent !important;
 }
 .exp-feature-card .fc-thumb img{
-  width:100%;height:100%;object-fit:cover;display:block;
+  display:block;
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:none !important;
 }
+.exp-feature-card .fc-thumb.portrait img{
+  width:auto !important;
+  height:100% !important;
+  max-width:100% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:none !important;
+}
+/* placeholder: same 16:9 box, no image */
 .fc-thumb-placeholder{
   width:100%;height:100%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
-  background:linear-gradient(135deg,#0d1f11 0%,#142a1a 100%);
+  background:#0a1a0f;
 }
-.fc-thumb-icon{
-  width:36px;height:36px;border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:700;color:#fff;
-  background:linear-gradient(135deg,#1a3a1a,#16a34a);
+.fc-thumb-placeholder-icon{
+  width:24px;height:24px;color:var(--muted);opacity:.4;
 }
-.fc-thumb-org{font-size:9px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.fc-thumb-placeholder-text{
+  font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.02em;opacity:.6;
+}
+/* bottom vignette — eases image-to-card transition */
+.exp-feature-card .fc-thumb::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:32px;
+  pointer-events:none;
+  background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%);
+}
 
-/* Card body */
+/* ── Card body ── */
 .exp-feature-card .fc-body{
-  padding:.9rem 1rem;
+  padding:.85rem 1rem .85rem;
   display:flex;flex-direction:column;gap:.4rem;flex:1;
 }
 .exp-feature-card .fc-meta-row{
@@ -257,16 +294,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bo
 }
 .exp-feature-card .fc-org{
   font-size:11px;color:#4ade80;font-weight:500;letter-spacing:.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.exp-feature-card .fc-year{font-size:11px;color:var(--muted);white-space:nowrap}
-.exp-feature-card .fc-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.35}
+.exp-feature-card .fc-year{font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.exp-feature-card .fc-title{
+  font-size:13px;font-weight:600;color:var(--text);line-height:1.35;
+}
 .exp-feature-card .fc-desc{
-  font-size:12px;color:var(--muted);line-height:1.5;flex:1;
+  font-size:11.5px;color:var(--muted);line-height:1.5;flex:1;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .exp-feature-card .fc-footer{
   display:flex;align-items:center;justify-content:space-between;gap:.5rem;
-  padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.25rem;
+  padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.1rem;
 }
 .fc-verified{
   display:inline-flex;align-items:center;gap:.3rem;
@@ -277,7 +317,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bo
 .fc-btn{
   font-size:11px;font-weight:500;
   color:#4ade80;background:#0f2a1a;text-decoration:none;
-  padding:.3rem .7rem;border-radius:5px;border:none;cursor:pointer;
+  padding:.3rem .65rem;border-radius:5px;border:none;cursor:pointer;
   transition:background .15s,color .15s;white-space:nowrap;
 }
 .fc-btn:hover{background:#14532d;color:#fff}
@@ -287,6 +327,57 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0d0d0d;border-bo
   letter-spacing:.06em;text-transform:uppercase;
   color:#4ade80;background:#0f2a1a;border:1px solid #1c3a26;
   padding:.2rem .55rem;border-radius:999px;margin-bottom:.25rem;width:fit-content;
+}
+
+/* ============================================================
+   CERTIFICATE MODAL / LIGHTBOX — shared by Featured Certificates
+   ============================================================ */
+.cert-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(3,8,5,.82);backdrop-filter:blur(3px);
+  align-items:center;justify-content:center;padding:2rem 1.25rem;
+}
+.cert-modal-overlay.open{display:flex}
+.cert-modal{
+  background:var(--bg2);border:1px solid #1c3a26;border-radius:14px;
+  max-width:560px;width:100%;max-height:88vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.55);
+  animation:certModalIn .18s ease;
+}
+@keyframes certModalIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.cert-modal-header{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.9rem 1.1rem;border-bottom:1px solid var(--line);flex-shrink:0;
+}
+.cert-modal-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.35}
+.cert-modal-close{
+  background:transparent;border:none;color:var(--muted);font-size:20px;line-height:1;
+  cursor:pointer;padding:.2rem .4rem;border-radius:6px;flex-shrink:0;
+}
+.cert-modal-close:hover{color:var(--text);background:var(--bg3)}
+.cert-modal-body{
+  flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;
+  background:var(--bg3);min-height:200px;
+}
+.cert-modal-body img{width:100%;height:auto;display:block}
+.cert-modal-empty{
+  padding:3rem 1.5rem;text-align:center;color:var(--muted);font-size:13px;
+}
+.cert-modal-footer{
+  display:flex;gap:.6rem;flex-wrap:wrap;padding:.9rem 1.1rem;
+  border-top:1px solid var(--line);flex-shrink:0;
+}
+.cert-modal-btn{
+  font-size:12px;font-weight:500;text-decoration:none;text-align:center;
+  padding:.5rem 1rem;border-radius:7px;cursor:pointer;border:1px solid #1c3a26;
+  background:#0f2a1a;color:#4ade80;transition:background .15s,color .15s;
+}
+.cert-modal-btn:hover{background:#14532d;color:#fff}
+.cert-modal-btn.secondary{
+  background:transparent;border-color:var(--line);color:var(--muted);
+}
+.cert-modal-btn.secondary:hover{border-color:#4ade80;color:#4ade80;background:transparent}
 
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:1.5rem 2.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
@@ -297,8 +388,15 @@ footer{border-top:1px solid var(--line);padding:1.5rem 2.5rem;max-width:1200px;m
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
 /* RESPONSIVE */
+@media(max-width:1100px){
+  /* tablet: 2-col */
+  .featured-exp-grid{grid-template-columns:repeat(2, 1fr)}
+}
 @media(min-width:721px) and (max-width:1023px){
   .layout{grid-template-columns:1fr 240px}
+}
+@media(max-width:768px){
+  /* mobile: 1-col */
   .featured-exp-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
@@ -307,7 +405,6 @@ footer{border-top:1px solid var(--line);padding:1.5rem 2.5rem;max-width:1200px;m
   .hero{flex-direction:column;gap:1.5rem;padding:80px 1.25rem 3rem}
   .layout{grid-template-columns:1fr;padding:0 1.25rem 0}
   .certs-section{padding:2rem 1.25rem 3rem}
-  .featured-exp-grid{grid-template-columns:1fr}
   footer{flex-direction:column;gap:.5rem;padding:1.5rem 1.25rem}
 }
 </style>
@@ -591,55 +688,21 @@ footer{border-top:1px solid var(--line);padding:1.5rem 2.5rem;max-width:1200px;m
     <span class="certs-section-title">Featured Certificates</span>
   </div>
   <div class="featured-exp-grid" id="f-featured-experience-grid">
-
-    <!-- Internship certificate -->
-    <div class="exp-feature-card">
-      <div class="fc-thumb">
-        <div class="fc-thumb-placeholder">
-          <div class="fc-thumb-icon">FI</div>
-          <span class="fc-thumb-org">Future Intern</span>
-        </div>
-      </div>
-      <div class="fc-body">
-        <span class="exp-feature-badge">Internship</span>
-        <div class="fc-meta-row">
-          <span class="fc-org">Future Intern · Hyderabad</span>
-          <span class="fc-year">Jun 2025</span>
-        </div>
-        <div class="fc-title">Full Stack Developer Internship</div>
-        <div class="fc-desc">Built and shipped full stack web apps end-to-end with direct mentorship on production-grade practices.</div>
-        <div class="fc-footer">
-          <span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>
-          <a href="#" class="fc-btn" target="_blank" rel="noopener">View Credential</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Program certificate -->
-    <div class="exp-feature-card">
-      <div class="fc-thumb">
-        <div class="fc-thumb-placeholder">
-          <div class="fc-thumb-icon">FI</div>
-          <span class="fc-thumb-org">Future Intern</span>
-        </div>
-      </div>
-      <div class="fc-body">
-        <span class="exp-feature-badge">Program</span>
-        <div class="fc-meta-row">
-          <span class="fc-org">Future Intern</span>
-          <span class="fc-year">Mar 2025</span>
-        </div>
-        <div class="fc-title">Future Intern Program</div>
-        <div class="fc-desc">Completed the Future Intern Full Stack track, delivering two production-ready frontend projects.</div>
-        <div class="fc-footer">
-          <span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>
-          <a href="#" class="fc-btn" target="_blank" rel="noopener">View Credential</a>
-        </div>
-      </div>
-    </div>
-
+    <!-- Cards are rendered dynamically from content.json (featuredExperience.items) -->
   </div><!-- /featured-exp-grid -->
 </section>
+
+<!-- CERTIFICATE MODAL / LIGHTBOX -->
+<div class="cert-modal-overlay" id="certModalOverlay">
+  <div class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <div class="cert-modal-header">
+      <span class="cert-modal-title" id="certModalTitle"></span>
+      <button type="button" class="cert-modal-close" id="certModalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="cert-modal-body" id="certModalBody"></div>
+    <div class="cert-modal-footer" id="certModalFooter"></div>
+  </div>
+</div>
 
 
 <footer>
@@ -731,33 +794,116 @@ document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
     }).join('');
   }
 
-  function renderFeaturedCard(item){
+  function certPlaceholderHtml(){
+    return '<div class="fc-thumb-placeholder">'
+      +'<svg class="fc-thumb-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">'
+      +'<rect x="3" y="4" width="18" height="14" rx="2"/>'
+      +'<path d="M3 15l4.5-4.5a1.5 1.5 0 0 1 2.1 0L14 15"/>'
+      +'<path d="M13 13.5l1.9-1.9a1.5 1.5 0 0 1 2.1 0L21 15"/>'
+      +'<circle cx="8" cy="8.5" r="1.5"/>'
+      +'</svg>'
+      +'<span class="fc-thumb-placeholder-text">Upload Certificate Preview</span>'
+      +'</div>';
+  }
+
+  function openCertModal(title, image, credentialUrl){
+    const overlay=document.getElementById('certModalOverlay');
+    const body=document.getElementById('certModalBody');
+    const footer=document.getElementById('certModalFooter');
+    const titleEl=document.getElementById('certModalTitle');
+    if(!overlay||!body||!footer||!titleEl) return;
+
+    titleEl.textContent=title||'Certificate';
+
+    if(image&&image.trim()){
+      body.innerHTML='<img src="'+esc(image)+'" alt="'+esc(title||'Certificate')+'"/>';
+    } else {
+      body.innerHTML=certPlaceholderHtml();
+    }
+
+    let footerHtml='';
+    if(credentialUrl&&credentialUrl.trim()){
+      footerHtml+='<a href="'+esc(credentialUrl)+'" target="_blank" rel="noopener" class="cert-modal-btn">Open Verification Link</a>';
+    }
+    footerHtml+='<button type="button" class="cert-modal-btn secondary" data-cert-modal-close>Close</button>';
+    footer.innerHTML=footerHtml;
+
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+
+  function closeCertModal(){
+    const overlay=document.getElementById('certModalOverlay');
+    if(!overlay) return;
+    overlay.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  (function initCertModal(){
+    const overlay=document.getElementById('certModalOverlay');
+    const closeBtn=document.getElementById('certModalClose');
+    if(closeBtn) closeBtn.addEventListener('click', closeCertModal);
+    if(overlay){
+      overlay.addEventListener('click', function(e){ if(e.target===overlay) closeCertModal(); });
+      overlay.addEventListener('click', function(e){ if(e.target.closest('[data-cert-modal-close]')) closeCertModal(); });
+    }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeCertModal(); });
+  })();
+
+  function renderFeaturedCard(item,idx){
     const hasImage=item.image&&item.image.trim();
-    const initials=(item.initials||item.organization||'?').slice(0,2).toUpperCase();
     const thumbHtml=hasImage
       ? '<img src="'+esc(item.image)+'" alt="'+esc(item.title)+'" loading="lazy"/>'
-      : '<div class="fc-thumb-placeholder"><div class="fc-thumb-icon">'+esc(initials)+'</div>'
-        +'<span class="fc-thumb-org">'+esc(item.organization)+'</span></div>';
-    const hasVerify=item.verificationUrl&&item.verificationUrl.trim();
-    const btnHref=hasVerify ? esc(item.verificationUrl) : (hasImage ? esc(item.image) : '#');
-    const btnTarget=hasVerify||hasImage?' target="_blank" rel="noopener"':'';
+      : certPlaceholderHtml();
+    const badgeLabel=item.type||item.badge||'';
+    const orgLabel=item.location&&item.location.trim()
+      ? esc(item.organization)+' · '+esc(item.location)
+      : esc(item.organization);
+    const credentialUrl=item.credentialUrl||item.verificationUrl||'';
+    const verified=item.verified!==false;
     return '<div class="exp-feature-card">'
-      +'<div class="fc-thumb">'+thumbHtml+'</div>'
+      +'<div class="fc-thumb' + (hasImage ? ' has-image' : '') + '">'+thumbHtml+'</div>'
       +'<div class="fc-body">'
-      +(item.badge?'<span class="exp-feature-badge">'+esc(item.badge)+'</span>':'')
-      +'<div class="fc-meta-row"><span class="fc-org">'+esc(item.organization)+'</span><span class="fc-year">'+esc(item.date)+'</span></div>'
+      +(badgeLabel?'<span class="exp-feature-badge">'+esc(badgeLabel)+'</span>':'')
+      +'<div class="fc-meta-row"><span class="fc-org">'+orgLabel+'</span><span class="fc-year">'+esc(item.date)+'</span></div>'
       +'<div class="fc-title">'+esc(item.title)+'</div>'
       +'<div class="fc-desc">'+esc(item.description)+'</div>'
-      +'<div class="fc-footer"><span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>'
-      +'<a href="'+btnHref+'" class="fc-btn"'+btnTarget+'>View Credential</a>'
+      +'<div class="fc-footer">'
+      +(verified?'<span class="fc-verified"><span class="fc-verified-dot"></span>Verified</span>':'<span></span>')
+      +'<button type="button" class="fc-btn" data-cert-idx="'+idx+'">Show Credential</button>'
       +'</div></div></div>';
+  }
+
+  function initThumbAspectRatios(container){
+    if(!container) return;
+    container.querySelectorAll('.fc-thumb img').forEach(function(img){
+      function checkRatio(){
+        if(img.naturalHeight && img.naturalWidth && img.naturalHeight > img.naturalWidth){
+          img.parentElement.classList.add('portrait');
+        }
+      }
+      if(img.complete){
+        checkRatio();
+      } else {
+        img.addEventListener('load', checkRatio);
+      }
+    });
   }
 
   function renderFeaturedExperience(container, fx){
     if(!container||!fx) return;
     // Accepts either { items:[...] } or the legacy { hero:{...}, supporting:{...} } shape.
     const items=Array.isArray(fx.items) ? fx.items : [fx.hero, fx.supporting].filter(Boolean);
-    if(items.length) container.innerHTML=items.map(renderFeaturedCard).join('');
+    if(!items.length) return;
+    container.innerHTML=items.map(renderFeaturedCard).join('');
+    initThumbAspectRatios(container);
+    container.querySelectorAll('[data-cert-idx]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const item=items[parseInt(btn.dataset.certIdx,10)];
+        if(!item) return;
+        openCertModal(item.title, item.image, item.credentialUrl||item.verificationUrl);
+      });
+    });
   }
 
   function renderSkills(container, groups){

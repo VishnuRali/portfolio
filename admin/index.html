@@ -9,95 +9,224 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#0d0d0d; --bg2:#161616; --bg3:#1e1e1e; --line:#2a2a2a;
-  --text:#f0ede8; --muted:#8a8a8a; --accent:#4f8ef7; --danger:#f87171; --success:#4ade80;
+  --text:#f0ede8; --muted:#8a8a8a;
+  --accent:#4ade80; --accent-dim:#0f2a1a; --accent-border:#1c3a26;
+  --accent-hover:#14532d;
+  --danger:#f87171; --success:#4ade80;
+  --sidebar-w:220px;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-header{position:sticky;top:0;z-index:10;background:#0d0d0d;border-bottom:1px solid var(--line);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between}
-.header-title{font-size:.95rem;font-weight:600}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* ── TOP HEADER ── */
+header{
+  position:sticky;top:0;z-index:50;
+  background:#0d0d0d;border-bottom:1px solid var(--line);
+  padding:0 1.5rem;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.header-left{display:flex;align-items:center;gap:1rem}
+.sidebar-toggle{
+  background:transparent;border:1px solid var(--line);color:var(--muted);
+  width:32px;height:32px;border-radius:7px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  transition:border-color .2s,color .2s;
+  display:none; /* hidden on desktop */
+}
+.sidebar-toggle:hover{border-color:#444;color:var(--text)}
+.header-title{font-size:.95rem;font-weight:600;color:var(--text)}
+.header-title span{color:var(--accent)}
 .header-actions{display:flex;gap:.6rem;align-items:center}
 .save-status{font-size:.78rem;color:var(--muted)}
-.btn{font-size:.82rem;font-weight:600;border:1px solid var(--line);background:var(--bg3);color:var(--text);padding:.45rem .9rem;border-radius:7px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn{font-size:.82rem;font-weight:600;border:1px solid var(--line);background:var(--bg3);color:var(--text);padding:.45rem .9rem;border-radius:7px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:border-color .2s}
 .btn:hover{border-color:#444}
-.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn-primary:hover{background:#3b7de8}
+.btn-primary{background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent)}
+.btn-primary:hover{background:var(--accent-hover);color:#fff}
 .btn-danger{color:var(--danger);border-color:#5a2a2a}
 .btn:disabled{opacity:.5;cursor:default}
 .btn-sm{font-size:.75rem;padding:.3rem .6rem}
 
-main{max-width:900px;margin:0 auto;padding:1.5rem}
-.tabs{display:flex;gap:.4rem;border-bottom:1px solid var(--line);margin-bottom:1.5rem;flex-wrap:wrap}
-.tab{font-size:.82rem;padding:.6rem .9rem;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;user-select:none}
-.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+/* ── BODY LAYOUT (sidebar + content) ── */
+.app-body{display:flex;flex:1;overflow:hidden}
+
+/* ── VERTICAL SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  background:var(--bg2);
+  border-right:1px solid var(--line);
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+  position:sticky;
+  top:56px;
+  height:calc(100vh - 56px);
+  transition:transform .25s ease;
+}
+.sidebar-section-label{
+  font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.9rem 1.1rem .4rem;
+}
+.sidebar-nav{list-style:none;padding:0 .5rem .5rem}
+.sidebar-nav li{margin-bottom:.15rem}
+.sidebar-nav a{
+  display:flex;align-items:center;gap:.65rem;
+  padding:.55rem .75rem;border-radius:8px;
+  font-size:.84rem;font-weight:500;color:var(--muted);
+  text-decoration:none;cursor:pointer;
+  transition:background .15s,color .15s;
+  border:none;background:transparent;width:100%;text-align:left;
+}
+.sidebar-nav a:hover{background:var(--bg3);color:var(--text)}
+.sidebar-nav a.active{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.sidebar-nav a svg{width:15px;height:15px;flex-shrink:0;opacity:.75}
+.sidebar-nav a.active svg{opacity:1}
+
+.sidebar-save{padding:.75rem .9rem;border-top:1px solid var(--line);margin-top:auto}
+.sidebar-save .btn-primary{width:100%;justify-content:center;padding:.55rem}
+
+/* ── MAIN CONTENT AREA ── */
+.main-content{flex:1;overflow-y:auto;padding:1.5rem}
 .panel{display:none}
 .panel.active{display:block}
 
+/* ── CARDS / FIELDS ── */
 .card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
-.card-title{font-size:.85rem;font-weight:600;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+.card-title{font-size:.85rem;font-weight:600;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+.card-desc{font-size:.78rem;color:var(--muted);margin-bottom:1rem;line-height:1.55}
 .field{margin-bottom:1rem}
 .field:last-child{margin-bottom:0}
 .field label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.35rem}
 .field input[type="text"],
 .field input[type="email"],
 .field input[type="url"],
+.field select,
 .field textarea{
   width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:7px;
   padding:.55rem .7rem;color:var(--text);font-size:.85rem;font-family:inherit;outline:none;
 }
-.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field select{appearance:none;cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
 .field textarea{resize:vertical;min-height:70px;line-height:1.5}
 .hint{font-size:.72rem;color:#666;margin-top:.3rem}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
 @media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr}}
 
-/* List items */
+/* ── LIST ITEMS ── */
 .list-item{border:1px solid var(--line);border-radius:8px;padding:1rem;margin-bottom:.75rem;background:var(--bg3)}
 .list-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;gap:.5rem}
 .list-item-title{font-size:.8rem;font-weight:600;color:var(--muted);flex:1}
 .list-item-actions{display:flex;gap:.4rem;align-items:center;flex-shrink:0}
 
-.add-btn{width:100%;border:1px dashed var(--line);background:transparent;color:var(--muted);padding:.6rem;border-radius:8px;font-size:.82rem;cursor:pointer}
+.add-btn{width:100%;border:1px dashed var(--line);background:transparent;color:var(--muted);padding:.6rem;border-radius:8px;font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s}
 .add-btn:hover{border-color:var(--accent);color:var(--accent)}
 
 .skill-group-card{border:1px solid var(--line);border-radius:8px;padding:1rem;margin-bottom:.75rem;background:var(--bg3)}
 
-/* Cert image preview */
+/* ── Featured Cert image upload (large thumbnail preview) ── */
+.fcert-img-upload-area{
+  border:1px solid var(--line);border-radius:8px;
+  background:var(--bg);overflow:hidden;margin-bottom:.6rem;
+}
+.fcert-img-thumb{
+  width:100%;
+  aspect-ratio:16/9;
+  height:160px;
+  max-height:160px;
+  display:flex;align-items:center;justify-content:center;
+  background:#0a1a0f;position:relative;overflow:hidden;
+}
+.fcert-img-thumb img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;display:block;
+}
+.fcert-img-thumb .no-img{
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--muted);opacity:.65;
+}
+.fcert-img-thumb .no-img svg{width:28px;height:28px}
+.fcert-img-thumb .no-img span{font-size:.75rem}
+.fcert-img-controls{
+  padding:.6rem .75rem;display:flex;align-items:center;gap:.6rem;
+  border-top:1px solid var(--line);background:var(--bg2);flex-wrap:wrap;
+}
+.fcert-img-controls label.upload-label{
+  font-size:.78rem;font-weight:600;
+  background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);
+  padding:.35rem .75rem;border-radius:6px;cursor:pointer;
+  transition:background .15s,color .15s;display:inline-flex;align-items:center;gap:.4rem;
+}
+.fcert-img-controls label.upload-label:hover{background:var(--accent-hover);color:#fff}
+.fcert-img-controls input[type="file"]{display:none}
+.fcert-img-filename{font-size:.72rem;color:var(--muted);word-break:break-all;flex:1}
+
+/* old cert image preview (small) */
 .cert-image-preview{
   width:80px;height:50px;border-radius:5px;border:1px solid var(--line);
   background:var(--bg);object-fit:cover;display:none;
 }
 .cert-image-preview.visible{display:block}
+.cert-image-preview-placeholder{
+  width:80px;height:50px;border-radius:5px;border:1px dashed var(--line);
+  background:var(--bg3);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.cert-image-preview-placeholder svg{width:18px;height:18px;color:var(--muted);opacity:.6}
 .cert-image-row{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
 .cert-image-filename{font-size:.72rem;color:var(--muted);margin-top:.25rem;word-break:break-all}
 .cert-checkbox-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted)}
 .cert-checkbox-row input[type="checkbox"]{width:14px;height:14px;accent-color:var(--accent)}
 
-/* Toast */
+/* ── Toast ── */
 #toast{
   position:fixed;bottom:1.5rem;right:1.5rem;background:var(--bg3);border:1px solid var(--line);
   color:var(--text);padding:.7rem 1rem;border-radius:8px;font-size:.82rem;display:none;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);max-width:320px;z-index:50;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);max-width:320px;z-index:200;
 }
 #toast.show{display:block}
 #toast.error{border-color:#5a2a2a;color:var(--danger)}
-#toast.success{border-color:#1f4a2a;color:var(--success)}
+#toast.success{border-color:var(--accent-border);color:var(--success)}
 
 .loading-screen{display:flex;align-items:center;justify-content:center;min-height:60vh;color:var(--muted);font-size:.85rem}
 .resume-row{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
 
-/* Dynamic list (languages, strengths, education) */
+/* Dynamic list */
 .dynamic-list-item{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
 .dynamic-list-item input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:6px;padding:.45rem .6rem;color:var(--text);font-size:.82rem;outline:none}
 .dynamic-list-item input:focus{border-color:var(--accent)}
 .dynamic-list-item .btn-danger{padding:.3rem .5rem}
-.dynamic-list-add{font-size:.78rem;color:var(--accent);background:transparent;border:1px dashed #2a4a7a;border-radius:6px;padding:.35rem .7rem;cursor:pointer;margin-top:.25rem}
-.dynamic-list-add:hover{background:#1a2540}
+.dynamic-list-add{font-size:.78rem;color:var(--accent);background:transparent;border:1px dashed var(--accent-border);border-radius:6px;padding:.35rem .7rem;cursor:pointer;margin-top:.25rem}
+.dynamic-list-add:hover{background:var(--accent-dim)}
+
+/* ── Dashboard overview ── */
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+.dash-stat{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.1rem;display:flex;flex-direction:column;gap:.3rem}
+.dash-stat-num{font-size:1.6rem;font-weight:700;color:var(--accent)}
+.dash-stat-label{font-size:.75rem;color:var(--muted)}
+.dash-links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+
+/* ── Responsive sidebar ── */
+@media(max-width:860px){
+  .sidebar{
+    position:fixed;top:56px;left:0;bottom:0;z-index:40;
+    transform:translateX(-100%);
+  }
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-toggle{display:flex}
+  .sidebar-overlay{
+    display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,.55);z-index:39;
+  }
+  .sidebar-overlay.open{display:block}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-title">Admin · Vishnu Vardhan Rali</div>
+  <div class="header-left">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">☰</button>
+    <div class="header-title">Admin · <span>Vishnu Vardhan Rali</span></div>
+  </div>
   <div class="header-actions">
     <span class="save-status" id="saveStatus"></span>
     <a href="/" target="_blank" class="btn btn-sm">View site ↗</a>
@@ -105,182 +234,306 @@ main{max-width:900px;margin:0 auto;padding:1.5rem}
   </div>
 </header>
 
-<main>
-  <div id="loadingScreen" class="loading-screen">Loading content…</div>
+<div class="app-body">
 
-  <div id="appContent" style="display:none">
-    <div class="tabs">
-      <div class="tab active" data-tab="home">Home</div>
-      <div class="tab" data-tab="experience">Experience</div>
-      <div class="tab" data-tab="projects">Projects</div>
-      <div class="tab" data-tab="skills">Skills</div>
-      <div class="tab" data-tab="certifications">Certifications</div>
-      <div class="tab" data-tab="contact">Contact &amp; Social</div>
-      <div class="tab" data-tab="resumecontent">Resume Content</div>
-      <div class="tab" data-tab="resume">Resume PDF</div>
+  <!-- ── VERTICAL SIDEBAR ── -->
+  <aside class="sidebar" id="adminSidebar" aria-label="Admin navigation">
+    <div class="sidebar-section-label">Navigation</div>
+    <ul class="sidebar-nav" id="sidebarNav">
+      <li>
+        <a href="#" class="active" data-panel="dashboard" id="nav-dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="#" data-panel="home" id="nav-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </li>
+      <li>
+        <a href="#" data-panel="projects" id="nav-projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Projects
+        </a>
+      </li>
+      <li>
+        <a href="#" data-panel="certifications" id="nav-certifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          Prof. Certifications
+        </a>
+      </li>
+      <li>
+        <a href="#" data-panel="featuredcerts" id="nav-featuredcerts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l4.5-4.5a1.5 1.5 0 0 1 2.1 0L14 15"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+          Featured Certs
+        </a>
+      </li>
+      <li>
+        <a href="#" data-panel="resume" id="nav-resume">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Resume
+        </a>
+      </li>
+      <li>
+        <a href="#" data-panel="contact" id="nav-contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Settings
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-save">
+      <button class="btn btn-primary" id="sidebarSaveBtn">Save changes</button>
     </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- HOME -->
-    <div class="panel active" id="panel-home">
-      <div class="card">
-        <div class="card-title">Hero</div>
-        <div class="field"><label>Name</label><input type="text" id="hero-name"/></div>
-        <div class="two-col">
-          <div class="field"><label>Title</label><input type="text" id="hero-title"/></div>
-          <div class="field"><label>Location line</label><input type="text" id="hero-location"/></div>
-        </div>
-        <div class="field"><label>Bio</label><textarea id="hero-bio"></textarea></div>
-        <div class="field"><label>Availability badge text (the green pill)</label><input type="text" id="hero-availabilityBadge"/></div>
-        <div class="field">
-          <label>Skill badges (comma-separated)</label>
-          <input type="text" id="hero-badges"/>
-          <div class="hint">Shown as pills under the bio, e.g. "HTML, CSS, JavaScript"</div>
-        </div>
-      </div>
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content" id="mainContent">
 
-      <div class="card">
-        <div class="card-title">Hero buttons</div>
-        <div class="three-col">
-          <div class="field"><label>Contact email</label><input type="text" id="cta-email"/></div>
-          <div class="field"><label>GitHub URL</label><input type="text" id="cta-github"/></div>
-          <div class="field"><label>LinkedIn URL</label><input type="text" id="cta-linkedin"/></div>
-        </div>
-      </div>
+    <div id="loadingScreen" class="loading-screen">Loading content…</div>
 
-      <div class="card">
-        <div class="card-title">Availability banner</div>
-        <div class="field"><label>Banner text</label><input type="text" id="availabilityBanner"/></div>
-      </div>
+    <div id="appContent" style="display:none">
 
-      <div class="card">
-        <div class="card-title">Education (sidebar summary)</div>
-        <div class="field"><label>Degree</label><input type="text" id="edu-degree"/></div>
-        <div class="two-col">
-          <div class="field"><label>Field of study</label><input type="text" id="edu-field"/></div>
-          <div class="field"><label>Meta (location · year)</label><input type="text" id="edu-meta"/></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Footer</div>
-        <div class="two-col">
-          <div class="field"><label>Left text</label><input type="text" id="footer-left"/></div>
-          <div class="field"><label>Right text</label><input type="text" id="footer-right"/></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EXPERIENCE -->
-    <div class="panel" id="panel-experience">
-      <div id="experienceList"></div>
-      <button class="add-btn" id="addExperienceBtn">+ Add experience entry</button>
-    </div>
-
-    <!-- PROJECTS -->
-    <div class="panel" id="panel-projects">
-      <div id="projectsList"></div>
-      <button class="add-btn" id="addProjectBtn">+ Add project</button>
-    </div>
-
-    <!-- SKILLS -->
-    <div class="panel" id="panel-skills">
-      <div id="skillsList"></div>
-      <button class="add-btn" id="addSkillGroupBtn">+ Add skill group</button>
-    </div>
-
-    <!-- CERTIFICATIONS — upgraded -->
-    <div class="panel" id="panel-certifications">
-      <div class="hint" style="margin-bottom:1rem;color:var(--muted);font-size:.8rem">
-        All certificates appear in the <strong>Certifications &amp; Internships</strong> section on the homepage.
-        If a verification URL exists (e.g. Credly/IBM badge), the View Certificate button will open it.
-        Otherwise it opens the certificate image. Use ↑ ↓ to reorder.
-      </div>
-      <div id="certificationsList"></div>
-      <button class="add-btn" id="addCertBtn">+ Add certificate</button>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="panel" id="panel-contact">
-      <div class="card">
-        <div class="card-title">Contact card (sidebar)</div>
-        <div class="field"><label>Email</label><input type="text" id="contact-email"/></div>
-        <div class="two-col">
-          <div class="field"><label>LinkedIn handle (display text)</label><input type="text" id="contact-linkedinHandle"/></div>
-          <div class="field"><label>LinkedIn URL</label><input type="text" id="contact-linkedinUrl"/></div>
-        </div>
-        <div class="two-col">
-          <div class="field"><label>GitHub handle (display text)</label><input type="text" id="contact-githubHandle"/></div>
-          <div class="field"><label>GitHub URL</label><input type="text" id="contact-githubUrl"/></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RESUME CONTENT (objective, phone, education, languages, strengths) -->
-    <div class="panel" id="panel-resumecontent">
-      <div class="card">
-        <div class="card-title">Objective</div>
-        <div class="field">
-          <label>Objective / Summary paragraph</label>
-          <textarea id="rc-objective" style="min-height:100px"></textarea>
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="card">
+          <div class="card-title">Welcome back 👋</div>
+          <div class="card-desc">Use the sidebar to navigate between sections. Changes are saved per-section using the "Save changes" button.</div>
+          <div class="dashboard-grid" id="dashStats"></div>
+          <div class="dash-links">
+            <a href="/" target="_blank" class="btn btn-sm">View site ↗</a>
+            <a href="/resume.html" target="_blank" class="btn btn-sm">View resume ↗</a>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-title">Contact (resume header)</div>
-        <div class="field"><label>Phone number</label><input type="text" id="rc-phone"/></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Education entries (resume main column)</div>
-        <div id="rc-education-list"></div>
-        <button class="add-btn" id="addEduBtn">+ Add education entry</button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Languages (resume sidebar)</div>
-        <div id="rc-languages-list"></div>
-        <button class="add-btn" id="addLangBtn">+ Add language</button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Strengths (resume sidebar)</div>
-        <div id="rc-strengths-list"></div>
-        <button class="add-btn" id="addStrengthBtn">+ Add strength</button>
-      </div>
-    </div>
-
-    <!-- RESUME PDF -->
-    <div class="panel" id="panel-resume">
-      <div class="card">
-        <div class="card-title">Resume PDF</div>
-        <p class="hint" style="margin-bottom:1rem">
-          Uploading a new PDF replaces the existing file in the repository under its current filename,
-          so every link to it on the site keeps working without changes.
-        </p>
-        <div class="resume-row">
-          <input type="file" id="resumeFileInput" accept="application/pdf"/>
-          <button class="btn btn-primary btn-sm" id="uploadResumeBtn" disabled>Upload &amp; Replace</button>
+      <!-- HOME / PROFILE -->
+      <div class="panel" id="panel-home">
+        <div class="card">
+          <div class="card-title">Hero</div>
+          <div class="field"><label>Name</label><input type="text" id="hero-name"/></div>
+          <div class="two-col">
+            <div class="field"><label>Title</label><input type="text" id="hero-title"/></div>
+            <div class="field"><label>Location line</label><input type="text" id="hero-location"/></div>
+          </div>
+          <div class="field"><label>Bio</label><textarea id="hero-bio"></textarea></div>
+          <div class="field"><label>Availability badge text (the green pill)</label><input type="text" id="hero-availabilityBadge"/></div>
+          <div class="field">
+            <label>Skill badges (comma-separated)</label>
+            <input type="text" id="hero-badges"/>
+            <div class="hint">Shown as pills under the bio, e.g. "HTML, CSS, JavaScript"</div>
+          </div>
         </div>
-        <div class="hint" id="resumeStatus" style="margin-top:.75rem"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Resume download URL</div>
-        <div class="field">
-          <label>Download URL (shown on resume.html)</label>
-          <input type="text" id="resume-downloadUrl"/>
-          <div class="hint">Usually /RALI_VISHNU_VARDHAN_RESUME_.pdf — only change if you rename the file.</div>
+
+        <div class="card">
+          <div class="card-title">Hero buttons</div>
+          <div class="three-col">
+            <div class="field"><label>Contact email</label><input type="text" id="cta-email"/></div>
+            <div class="field"><label>GitHub URL</label><input type="text" id="cta-github"/></div>
+            <div class="field"><label>LinkedIn URL</label><input type="text" id="cta-linkedin"/></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Availability banner</div>
+          <div class="field"><label>Banner text</label><input type="text" id="availabilityBanner"/></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Education (sidebar summary)</div>
+          <div class="field"><label>Degree</label><input type="text" id="edu-degree"/></div>
+          <div class="two-col">
+            <div class="field"><label>Field of study</label><input type="text" id="edu-field"/></div>
+            <div class="field"><label>Meta (location · year)</label><input type="text" id="edu-meta"/></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Footer</div>
+          <div class="two-col">
+            <div class="field"><label>Left text</label><input type="text" id="footer-left"/></div>
+            <div class="field"><label>Right text</label><input type="text" id="footer-right"/></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Experience</div>
+          <div id="experienceList"></div>
+          <button class="add-btn" id="addExperienceBtn">+ Add experience entry</button>
         </div>
       </div>
-    </div>
 
-    <div style="margin-top:1.5rem;display:flex;justify-content:flex-end;gap:.6rem">
-      <button class="btn btn-primary" id="saveBtn">Save changes</button>
-    </div>
-  </div>
-</main>
+      <!-- PROJECTS -->
+      <div class="panel" id="panel-projects">
+        <div class="card">
+          <div class="card-title">Projects</div>
+          <div id="projectsList"></div>
+          <button class="add-btn" id="addProjectBtn">+ Add project</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Skills</div>
+          <div id="skillsList"></div>
+          <button class="add-btn" id="addSkillGroupBtn">+ Add skill group</button>
+        </div>
+      </div>
+
+      <!-- PROFESSIONAL CERTIFICATIONS -->
+      <div class="panel" id="panel-certifications">
+        <div class="card">
+          <div class="card-title">Professional Certifications</div>
+          <div class="card-desc">
+            All certificates appear in the <strong>Certifications &amp; Internships</strong> section on the homepage.
+            If a verification URL exists (e.g. Credly/IBM badge), the View Certificate button will open it.
+            Otherwise it opens the certificate image. Use ↑ ↓ to reorder.
+          </div>
+          <div id="certificationsList"></div>
+          <button class="add-btn" id="addCertBtn">+ Add certificate</button>
+        </div>
+      </div>
+
+      <!-- FEATURED CERTIFICATES -->
+      <div class="panel" id="panel-featuredcerts">
+        <div class="card">
+          <div class="card-title">Featured Certificates</div>
+          <div class="card-desc">
+            These cards appear in the <strong>Featured Certificates</strong> section on the homepage (green internship/program cards).
+            Clicking "Show Credential" on the site opens the certificate image in a popup.
+            Upload a clear image — it becomes the card thumbnail instantly. Use ↑ ↓ to reorder.
+          </div>
+          <div id="featuredCertsList"></div>
+          <button class="add-btn" id="addFeaturedCertBtn">+ Add featured certificate</button>
+        </div>
+      </div>
+
+      <!-- RESUME -->
+      <div class="panel" id="panel-resume">
+        <div class="card">
+          <div class="card-title">Resume PDF</div>
+          <p class="hint" style="margin-bottom:1rem">
+            Uploading a new PDF replaces the existing file in the repository under its current filename,
+            so every link to it on the site keeps working without changes.
+          </p>
+          <div class="resume-row">
+            <input type="file" id="resumeFileInput" accept="application/pdf"/>
+            <button class="btn btn-primary btn-sm" id="uploadResumeBtn" disabled>Upload &amp; Replace</button>
+          </div>
+          <div class="hint" id="resumeStatus" style="margin-top:.75rem"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Resume download URL</div>
+          <div class="field">
+            <label>Download URL (shown on resume.html)</label>
+            <input type="text" id="resume-downloadUrl"/>
+            <div class="hint">Usually /RALI_VISHNU_VARDHAN_RESUME_.pdf — only change if you rename the file.</div>
+          </div>
+        </div>
+
+        <!-- RESUME CONTENT -->
+        <div class="card">
+          <div class="card-title">Objective</div>
+          <div class="field">
+            <label>Objective / Summary paragraph</label>
+            <textarea id="rc-objective" style="min-height:100px"></textarea>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Contact (resume header)</div>
+          <div class="field"><label>Phone number</label><input type="text" id="rc-phone"/></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Education entries (resume main column)</div>
+          <div id="rc-education-list"></div>
+          <button class="add-btn" id="addEduBtn">+ Add education entry</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Languages (resume sidebar)</div>
+          <div id="rc-languages-list"></div>
+          <button class="add-btn" id="addLangBtn">+ Add language</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Strengths (resume sidebar)</div>
+          <div id="rc-strengths-list"></div>
+          <button class="add-btn" id="addStrengthBtn">+ Add strength</button>
+        </div>
+      </div>
+
+      <!-- SETTINGS / CONTACT -->
+      <div class="panel" id="panel-contact">
+        <div class="card">
+          <div class="card-title">Contact card (sidebar)</div>
+          <div class="field"><label>Email</label><input type="text" id="contact-email"/></div>
+          <div class="two-col">
+            <div class="field"><label>LinkedIn handle (display text)</label><input type="text" id="contact-linkedinHandle"/></div>
+            <div class="field"><label>LinkedIn URL</label><input type="text" id="contact-linkedinUrl"/></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label>GitHub handle (display text)</label><input type="text" id="contact-githubHandle"/></div>
+            <div class="field"><label>GitHub URL</label><input type="text" id="contact-githubUrl"/></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;display:flex;justify-content:flex-end;gap:.6rem">
+        <button class="btn btn-primary" id="saveBtn">Save changes</button>
+      </div>
+
+    </div><!-- /appContent -->
+
+  </main>
+</div><!-- /app-body -->
 
 <div id="toast"></div>
 
 <script src="/admin/admin.js"></script>
+
+<script>
+// ── Sidebar navigation ──
+(function(){
+  const toggle = document.getElementById('sidebarToggle');
+  const sidebar = document.getElementById('adminSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+  toggle && toggle.addEventListener('click', function(){
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+  });
+  overlay && overlay.addEventListener('click', closeSidebar);
+
+  // Wire nav links
+  document.querySelectorAll('#sidebarNav a[data-panel]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      const panelId = link.dataset.panel;
+
+      // Update active state
+      document.querySelectorAll('#sidebarNav a').forEach(function(a){ a.classList.remove('active'); });
+      link.classList.add('active');
+
+      // Show panel
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+      var panel = document.getElementById('panel-' + panelId);
+      if(panel) panel.classList.add('active');
+
+      // Close on mobile
+      if(window.innerWidth <= 860) closeSidebar();
+    });
+  });
+
+  // Sidebar save button mirrors the main save button
+  var sidebarSave = document.getElementById('sidebarSaveBtn');
+  var mainSave = document.getElementById('saveBtn');
+  sidebarSave && sidebarSave.addEventListener('click', function(){
+    mainSave && mainSave.click();
+  });
+})();
+</script>
+
 </body>
 </html>

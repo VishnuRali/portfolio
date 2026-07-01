@@ -28,6 +28,14 @@ function escHtml(s) {
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
+// Image paths are stored root-relative (e.g. "images/foo.jpg"). The admin
+// panel lives under /admin/, so a bare relative src would 404 there —
+// always resolve to an absolute, root-relative URL for previews.
+function resolveImgSrc(path) {
+  if (!path) return '';
+  if (/^(https?:)?\/\//.test(path) || path.startsWith('/')) return path;
+  return '/' + path;
+}
 
 // ---------- auth ----------
 async function checkAuth() {
@@ -54,15 +62,9 @@ $('logoutBtn').addEventListener('click', async () => {
   window.location.href = '/admin/login.html';
 });
 
-// ---------- tabs ----------
-document.querySelectorAll('.tab').forEach((tab) => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach((p) => p.classList.remove('active'));
-    tab.classList.add('active');
-    $('panel-' + tab.dataset.tab).classList.add('active');
-  });
-});
+// ---------- sidebar nav ----------
+// Navigation is handled in admin/index.html inline script (data-panel attributes).
+// No tab wiring needed here.
 
 // ---------- load content ----------
 async function loadContent() {
@@ -78,6 +80,40 @@ async function loadContent() {
     };
   }
   if (!state.resume) state.resume = { filename: '', downloadUrl: '' };
+
+  // Ensure featuredExperience exists and each item has the full field set
+  // (backwards compat with older content.json that only had a subset).
+  if (!state.featuredExperience || !Array.isArray(state.featuredExperience.items)) {
+    state.featuredExperience = { items: [] };
+  }
+  state.featuredExperience.items.forEach((item, idx) => {
+    if (!item.id) item.id = 'feat-' + String(idx + 1).padStart(2, '0');
+    if (!item.type) item.type = item.badge || 'Internship';
+    if (!item.badge) item.badge = item.type;
+    if (item.location == null) item.location = '';
+    if (item.credentialUrl == null) item.credentialUrl = item.verificationUrl || '';
+    if (item.verified == null) item.verified = true;
+    if (item.organization == null) item.organization = '';
+    if (item.image == null) item.image = '';
+    if (item.description == null) item.description = '';
+    if (item.date == null) item.date = '';
+  });
+}
+
+// ---------- render: Dashboard ----------
+function renderDashboard() {
+  const el = $('dashStats');
+  if (!el || !state) return;
+  const featureCount = (state.featuredExperience && state.featuredExperience.items) ? state.featuredExperience.items.length : 0;
+  const certCount = Array.isArray(state.certifications) ? state.certifications.length : 0;
+  const projCount = Array.isArray(state.projects) ? state.projects.length : 0;
+  const expCount = Array.isArray(state.experience) ? state.experience.length : 0;
+  el.innerHTML = [
+    { num: expCount, label: 'Experience entries' },
+    { num: projCount, label: 'Projects' },
+    { num: certCount, label: 'Certifications' },
+    { num: featureCount, label: 'Featured Certificates' },
+  ].map(s => `<div class="dash-stat"><div class="dash-stat-num">${s.num}</div><div class="dash-stat-label">${s.label}</div></div>`).join('');
 }
 
 // ---------- render: Home tab ----------
@@ -308,7 +344,7 @@ function renderCertifications() {
       <div class="field">
         <label>Certificate image</label>
         <div class="cert-image-row">
-          ${hasImage ? `<img src="${escAttr(item.image)}" class="cert-image-preview visible" data-preview-idx="${idx}" alt="preview"/>` : `<img class="cert-image-preview" data-preview-idx="${idx}" alt="preview"/>`}
+          ${hasImage ? `<img src="${escAttr(resolveImgSrc(item.image))}" class="cert-image-preview visible" data-preview-idx="${idx}" alt="preview"/>` : `<img class="cert-image-preview" data-preview-idx="${idx}" alt="preview"/>`}
           <div>
             <input type="file" accept="image/jpeg,image/png,image/webp" data-action="upload-cert-image" data-idx="${idx}"/>
             <div class="cert-image-filename" data-filename-idx="${idx}">${hasImage ? escHtml(item.image) : 'No image uploaded yet'}</div>
@@ -424,6 +460,187 @@ $('addCertBtn').addEventListener('click', () => {
     year: '2025', image: '', verificationUrl: '', verified: true
   });
   renderCertifications();
+});
+
+// ---------- render: Featured Certificates tab ----------
+const FEATURED_CERT_TYPES = ['Internship', 'Program', 'Achievement'];
+
+function renderFeaturedCerts() {
+  const container = $('featuredCertsList');
+  container.innerHTML = '';
+  const items = state.featuredExperience.items;
+
+  items.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    const hasImage = item.image && item.image.trim();
+    const typeOptions = FEATURED_CERT_TYPES.map((t) =>
+      `<option value="${escAttr(t)}" ${item.type === t ? 'selected' : ''}>${escHtml(t)}</option>`
+    ).join('');
+    div.innerHTML = `
+      <div class="list-item-header">
+        <span class="list-item-title">Featured Certificate ${idx + 1}</span>
+        <div class="list-item-actions">
+          <button class="btn btn-sm" data-action="move-fcert-up" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''}>↑</button>
+          <button class="btn btn-sm" data-action="move-fcert-down" data-idx="${idx}" ${idx === items.length - 1 ? 'disabled' : ''}>↓</button>
+          <button class="btn btn-sm btn-danger" data-action="remove-fcert" data-idx="${idx}">Remove</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="field"><label>Title</label><input type="text" data-field="title" data-idx="${idx}" value="${escAttr(item.title||'')}"/></div>
+        <div class="field"><label>Type</label><select data-field="type" data-idx="${idx}">${typeOptions}</select></div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label>Organization</label><input type="text" data-field="organization" data-idx="${idx}" value="${escAttr(item.organization||'')}"/></div>
+        <div class="field"><label>Location</label><input type="text" data-field="location" data-idx="${idx}" value="${escAttr(item.location||'')}"/></div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label>Date</label><input type="text" data-field="date" data-idx="${idx}" value="${escAttr(item.date||'')}" placeholder="e.g. Jun 2025"/></div>
+        <div class="field"><label>Certificate ID (optional, used in filename)</label><input type="text" data-field="id" data-idx="${idx}" value="${escAttr(item.id||'')}"/></div>
+      </div>
+      <div class="field"><label>Description</label><textarea data-field="description" data-idx="${idx}" style="min-height:52px">${escHtml(item.description||'')}</textarea></div>
+      <div class="field"><label>Credential URL</label><input type="url" data-field="credentialUrl" data-idx="${idx}" value="${escAttr(item.credentialUrl||'')}"/><div class="hint">If set, a "Open Verification Link" button appears in the certificate popup alongside the image.</div></div>
+      <div class="field">
+        <label>Certificate image (thumbnail)</label>
+        <div class="fcert-img-upload-area">
+          <div class="fcert-img-thumb" id="fcert-thumb-${idx}">
+            ${hasImage
+              ? `<img src="${escAttr(resolveImgSrc(item.image))}" alt="certificate preview" data-fpreview-idx="${idx}"/>`
+              : `<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l4.5-4.5a1.5 1.5 0 0 1 2.1 0L14 15"/><path d="M13 13.5l1.9-1.9a1.5 1.5 0 0 1 2.1 0L21 15"/><circle cx="8" cy="8.5" r="1.5"/></svg><span>No image yet</span></div><img class="" data-fpreview-idx="${idx}" alt="preview" style="display:none"/>`
+            }
+          </div>
+          <div class="fcert-img-controls">
+            <label class="upload-label" for="fcert-upload-${idx}">📷 Upload image
+              <input type="file" id="fcert-upload-${idx}" accept="image/jpeg,image/png,image/webp" data-action="upload-fcert-image" data-idx="${idx}"/>
+            </label>
+            <span class="fcert-img-filename" data-ffilename-idx="${idx}">${hasImage ? escHtml(item.image) : 'No image uploaded'}</span>
+          </div>
+        </div>
+        <div class="hint">JPG/PNG/WebP · max 5 MB · The uploaded image becomes the card thumbnail on the homepage instantly after save.</div>
+      </div>
+      <div class="field">
+        <label class="cert-checkbox-row">
+          <input type="checkbox" data-field="verified" data-idx="${idx}" ${item.verified !== false ? 'checked' : ''}/>
+          Show "Verified" badge on card
+        </label>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  // Text/url/textarea inputs
+  container.querySelectorAll('input[type="text"],input[type="url"],textarea').forEach((input) => {
+    if (!input.dataset.field) return;
+    input.addEventListener('input', () => {
+      const idx = parseInt(input.dataset.idx, 10);
+      state.featuredExperience.items[idx][input.dataset.field] = input.value;
+    });
+  });
+
+  // Type select
+  container.querySelectorAll('select[data-field="type"]').forEach((sel) => {
+    sel.addEventListener('change', () => {
+      const idx = parseInt(sel.dataset.idx, 10);
+      state.featuredExperience.items[idx].type = sel.value;
+      state.featuredExperience.items[idx].badge = sel.value; // keep legacy field in sync
+    });
+  });
+
+  // Checkbox
+  container.querySelectorAll('input[type="checkbox"][data-field="verified"]').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      state.featuredExperience.items[parseInt(cb.dataset.idx, 10)].verified = cb.checked;
+    });
+  });
+
+  // Remove
+  container.querySelectorAll('[data-action="remove-fcert"]').forEach((btn) => {
+    btn.addEventListener('click', () => { state.featuredExperience.items.splice(parseInt(btn.dataset.idx, 10), 1); renderFeaturedCerts(); });
+  });
+
+  // Reorder up
+  container.querySelectorAll('[data-action="move-fcert-up"]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const i = parseInt(btn.dataset.idx, 10);
+      const arr = state.featuredExperience.items;
+      if (i > 0) { [arr[i-1], arr[i]] = [arr[i], arr[i-1]]; renderFeaturedCerts(); }
+    });
+  });
+
+  // Reorder down
+  container.querySelectorAll('[data-action="move-fcert-down"]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const i = parseInt(btn.dataset.idx, 10);
+      const arr = state.featuredExperience.items;
+      if (i < arr.length - 1) { [arr[i], arr[i+1]] = [arr[i+1], arr[i]]; renderFeaturedCerts(); }
+    });
+  });
+
+  // Image upload
+  container.querySelectorAll('[data-action="upload-fcert-image"]').forEach((fileInput) => {
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      const idx = parseInt(fileInput.dataset.idx, 10);
+      const item = state.featuredExperience.items[idx];
+
+      // Build a safe filename from the item id or title
+      const base = ('featured-' + (item.id || idx)).replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase();
+      const ext = file.name.split('.').pop().toLowerCase();
+      const filename = `${base}.${ext}`;
+
+      fileInput.disabled = true;
+      showToast('Uploading image…', '');
+
+      try {
+        const fileBase64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error('Could not read file.'));
+          reader.readAsDataURL(file);
+        });
+
+        const res = await fetch('/api/image', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filename, fileBase64 })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Upload failed.');
+
+        // Update state with the committed path
+        const repoPath = 'images/' + data.filename;
+        state.featuredExperience.items[idx].image = repoPath;
+
+        // Update preview in the large thumbnail area
+        const thumb = container.querySelector(`#fcert-thumb-${idx}`);
+        if (thumb) {
+          thumb.innerHTML = `<img src="/${repoPath}" alt="certificate preview" data-fpreview-idx="${idx}"/>`;
+        }
+
+        const filenameLabel = container.querySelector(`[data-ffilename-idx="${idx}"]`);
+        if (filenameLabel) filenameLabel.textContent = repoPath;
+
+        showToast('Image uploaded. Save changes to update the site.', 'success');
+      } catch (err) {
+        showToast(err.message || 'Image upload failed.', 'error');
+      } finally {
+        fileInput.disabled = false;
+        fileInput.value = '';
+      }
+    });
+  });
+}
+
+$('addFeaturedCertBtn').addEventListener('click', () => {
+  const nextId = 'feat-' + String(state.featuredExperience.items.length + 1).padStart(2, '0');
+  state.featuredExperience.items.push({
+    id: nextId, title: '', type: 'Internship', badge: 'Internship',
+    organization: '', location: '', date: '', initials: '',
+    description: '', image: '', credentialUrl: '', verificationUrl: '', verified: true
+  });
+  renderFeaturedCerts();
 });
 
 // ---------- render: Contact tab ----------
@@ -586,11 +803,13 @@ function collectResumePdf() {
 
 // ---------- render all ----------
 function renderAll() {
+  renderDashboard();
   renderHome();
   renderExperience();
   renderProjects();
   renderSkills();
   renderCertifications();
+  renderFeaturedCerts();
   renderContact();
   renderResumeContent();
   renderResumePdf();
@@ -602,7 +821,7 @@ async function saveAll() {
   collectContact();
   collectResumeContent();
   collectResumePdf();
-  // experience/projects/skills/certifications already mutate `state` directly via input listeners
+  // experience/projects/skills/certifications/featuredExperience already mutate `state` directly via input listeners
 
   const saveBtn = $('saveBtn');
   saveBtn.disabled = true;
